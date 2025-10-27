@@ -1,0 +1,407 @@
+✓ Loaded USA: (6812, 21)
+✓ Loaded Canada: (308, 21)
+✓ Loaded France: (308, 21)
+✓ Loaded Germany: (308, 21)
+✓ Loaded Italy: (308, 21)
+✓ Loaded Japan: (308, 21)
+✓ Loaded UK: (308, 21)
+✓ Loaded Brazil: (25, 19)
+✓ Loaded Russia: (25, 17)
+✓ Loaded India: (25, 14)
+✓ Loaded China: (25, 20)
+✓ Loaded South Africa: (25, 18)
+
+============================================================
+Processing: USA
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Aligned USA to quarter-end dates: (6812, 21) → (104, 20)
+[2/6] Imputing missing data...
+    gdp_real: 2 missing → 0 after interpolation
+    gdp_nominal: 2 missing → 0 after interpolation
+    unemployment_rate: 1 missing → 0 after interpolation
+    cpi_all_items: 1 missing → 0 after interpolation
+    cpi_annual_growth: 79 missing → 0 after interpolation
+    industrial_production_index: 1 missing → 0 after interpolation
+    exports_volume: 2 missing → 0 after interpolation
+    imports_volume: 2 missing → 0 after interpolation
+    trade_balance: 1 missing → 0 after interpolation
+    household_consumption: 1 missing → 0 after interpolation
+    capital_formation: 2 missing → 0 after interpolation
+    employment_level: 1 missing → 0 after interpolation
+    money_supply_broad: 1 missing → 0 after interpolation
+    exchange_rate_usd: 24 missing → 0 after interpolation
+    stock_market_index: 63 missing → 0 after forward-fill
+    government_spending: 2 missing → 0 after interpolation
+    population_working_age: 1 missing → 0 after interpolation
+  → USA imputation: 186 missing → 0 remaining
+[3/6] Creating engineered features...
+  → Created 32 engineered features for USA
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/usa_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 52 columns for USA
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for USA
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/usa_processed_normalized.csv
+
+Summary for USA:
+  Original shape: (6812, 21)
+  Final shape: (104, 53)
+  Date range: 2000-03-31 00:00:00 to 2025-12-31 00:00:00
+  Remaining missing values: 84
+
+============================================================
+Processing: Canada
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Canada from monthly to quarterly: (308, 21) → (103, 20)
+[2/6] Imputing missing data...
+    gdp_real: 2 missing → 0 after interpolation
+    gdp_nominal: 2 missing → 0 after interpolation
+    unemployment_rate: 1 missing → 0 after interpolation
+    cpi_all_items: 2 missing → 0 after interpolation
+    cpi_annual_growth: 78 missing → 0 after interpolation
+    industrial_production_index: 8 missing → 0 after interpolation
+    exports_volume: 8 missing → 0 after interpolation
+    imports_volume: 8 missing → 0 after interpolation
+    trade_balance: 46 missing → 0 after interpolation
+    household_consumption: 8 missing → 0 after interpolation
+    capital_formation: 8 missing → 0 after interpolation
+    employment_level: 8 missing → 0 after interpolation
+    money_supply_broad: 7 missing → 0 after interpolation
+    government_spending: 6 missing → 0 after interpolation
+    population_total: 78 missing → 0 after interpolation
+  → Canada imputation: 270 missing → 0 remaining
+[3/6] Creating engineered features...
+  → Created 32 engineered features for Canada
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/canada_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 52 columns for Canada
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for Canada
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/canada_processed_normalized.csv
+
+Summary for Canada:
+  Original shape: (308, 21)
+  Final shape: (103, 53)
+  Date range: 2000-03-31 00:00:00 to 2025-09-30 00:00:00
+  Remaining missing values: 84
+
+============================================================
+Processing: France
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled France from monthly to quarterly: (308, 21) → (103, 20)
+[2/6] Imputing missing data...
+    gdp_real: 1 missing → 0 after interpolation
+    gdp_nominal: 1 missing → 0 after interpolation
+    unemployment_rate: 14 missing → 0 after interpolation
+    cpi_all_items: 2 missing → 0 after interpolation
+    cpi_annual_growth: 78 missing → 0 after interpolation
+    industrial_production_index: 6 missing → 0 after interpolation
+    exports_volume: 8 missing → 0 after interpolation
+    imports_volume: 8 missing → 0 after interpolation
+    trade_balance: 46 missing → 0 after interpolation
+    household_consumption: 8 missing → 0 after interpolation
+    capital_formation: 8 missing → 0 after interpolation
+    employment_level: 14 missing → 0 after interpolation
+    government_spending: 1 missing → 0 after interpolation
+    population_total: 78 missing → 0 after interpolation
+    population_working_age: 78 missing → 0 after interpolation
+  → France imputation: 454 missing → 103 remaining
+[3/6] Creating engineered features...
+  → Created 32 engineered features for France
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/france_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 50 columns for France
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for France
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/france_processed_normalized.csv
+
+Summary for France:
+  Original shape: (308, 21)
+  Final shape: (103, 53)
+  Date range: 2000-03-31 00:00:00 to 2025-09-30 00:00:00
+  Remaining missing values: 286
+
+============================================================
+Processing: Germany
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Germany from monthly to quarterly: (308, 21) → (103, 20)
+[2/6] Imputing missing data...
+    gdp_real: 1 missing → 0 after interpolation
+    gdp_nominal: 1 missing → 0 after interpolation
+    unemployment_rate: 2 missing → 0 after interpolation
+    cpi_all_items: 2 missing → 0 after interpolation
+    cpi_annual_growth: 78 missing → 0 after interpolation
+    industrial_production_index: 6 missing → 0 after interpolation
+    exports_volume: 8 missing → 0 after interpolation
+    imports_volume: 8 missing → 0 after interpolation
+    trade_balance: 46 missing → 0 after interpolation
+    household_consumption: 8 missing → 0 after interpolation
+    capital_formation: 8 missing → 0 after interpolation
+    employment_level: 2 missing → 0 after interpolation
+    government_spending: 2 missing → 0 after interpolation
+    population_total: 78 missing → 0 after interpolation
+    population_working_age: 78 missing → 0 after interpolation
+  → Germany imputation: 431 missing → 103 remaining
+[3/6] Creating engineered features...
+  → Created 32 engineered features for Germany
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/germany_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 50 columns for Germany
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for Germany
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/germany_processed_normalized.csv
+
+Summary for Germany:
+  Original shape: (308, 21)
+  Final shape: (103, 53)
+  Date range: 2000-03-31 00:00:00 to 2025-09-30 00:00:00
+  Remaining missing values: 286
+
+============================================================
+Processing: Italy
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Italy from monthly to quarterly: (308, 21) → (103, 20)
+[2/6] Imputing missing data...
+    gdp_real: 1 missing → 0 after interpolation
+    gdp_nominal: 1 missing → 0 after interpolation
+    unemployment_rate: 2 missing → 0 after interpolation
+    cpi_all_items: 2 missing → 0 after interpolation
+    cpi_annual_growth: 78 missing → 0 after interpolation
+    industrial_production_index: 6 missing → 0 after interpolation
+    exports_volume: 8 missing → 0 after interpolation
+    imports_volume: 8 missing → 0 after interpolation
+    trade_balance: 46 missing → 0 after interpolation
+    household_consumption: 8 missing → 0 after interpolation
+    capital_formation: 8 missing → 0 after interpolation
+    employment_level: 2 missing → 0 after interpolation
+    government_spending: 2 missing → 0 after interpolation
+    population_total: 78 missing → 0 after interpolation
+    population_working_age: 2 missing → 0 after interpolation
+  → Italy imputation: 355 missing → 103 remaining
+[3/6] Creating engineered features...
+  → Created 32 engineered features for Italy
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/italy_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 50 columns for Italy
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for Italy
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/italy_processed_normalized.csv
+
+Summary for Italy:
+  Original shape: (308, 21)
+  Final shape: (103, 53)
+  Date range: 2000-03-31 00:00:00 to 2025-09-30 00:00:00
+  Remaining missing values: 286
+
+============================================================
+Processing: Japan
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Japan from monthly to quarterly: (308, 21) → (103, 20)
+[2/6] Imputing missing data...
+    gdp_real: 2 missing → 0 after interpolation
+    gdp_nominal: 2 missing → 0 after interpolation
+    unemployment_rate: 1 missing → 0 after interpolation
+    cpi_all_items: 17 missing → 0 after interpolation
+    cpi_annual_growth: 78 missing → 0 after interpolation
+    industrial_production_index: 6 missing → 0 after interpolation
+    exports_volume: 8 missing → 0 after interpolation
+    imports_volume: 8 missing → 0 after interpolation
+    trade_balance: 47 missing → 0 after interpolation
+    household_consumption: 8 missing → 0 after interpolation
+    capital_formation: 8 missing → 0 after interpolation
+    money_supply_broad: 7 missing → 0 after interpolation
+    government_spending: 2 missing → 0 after interpolation
+    population_total: 78 missing → 0 after interpolation
+  → Japan imputation: 272 missing → 0 remaining
+[3/6] Creating engineered features...
+  → Created 32 engineered features for Japan
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/japan_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 52 columns for Japan
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for Japan
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/japan_processed_normalized.csv
+
+Summary for Japan:
+  Original shape: (308, 21)
+  Final shape: (103, 53)
+  Date range: 2000-03-31 00:00:00 to 2025-09-30 00:00:00
+  Remaining missing values: 84
+
+============================================================
+Processing: UK
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled UK from monthly to quarterly: (308, 21) → (103, 20)
+[2/6] Imputing missing data...
+    gdp_real: 2 missing → 0 after interpolation
+    gdp_nominal: 2 missing → 0 after interpolation
+    unemployment_rate: 1 missing → 0 after interpolation
+    cpi_all_items: 2 missing → 0 after interpolation
+    cpi_annual_growth: 78 missing → 0 after interpolation
+    industrial_production_index: 6 missing → 0 after interpolation
+    exports_volume: 8 missing → 0 after interpolation
+    imports_volume: 8 missing → 0 after interpolation
+    trade_balance: 46 missing → 0 after interpolation
+    household_consumption: 8 missing → 0 after interpolation
+    capital_formation: 6 missing → 0 after interpolation
+    employment_level: 78 missing → 0 after interpolation
+    money_supply_broad: 7 missing → 0 after interpolation
+    government_spending: 2 missing → 0 after interpolation
+    population_total: 78 missing → 0 after interpolation
+    population_working_age: 1 missing → 0 after interpolation
+  → UK imputation: 333 missing → 0 remaining
+[3/6] Creating engineered features...
+  → Created 32 engineered features for UK
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/uk_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 52 columns for UK
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for UK
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/uk_processed_normalized.csv
+
+Summary for UK:
+  Original shape: (308, 21)
+  Final shape: (103, 53)
+  Date range: 2000-03-31 00:00:00 to 2025-09-30 00:00:00
+  Remaining missing values: 84
+
+============================================================
+Processing: Brazil
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Brazil from annual to quarterly (interpolated): (25, 19) → (96, 18)
+[2/6] Imputing missing data...
+  → Brazil imputation: 1728 missing → 1728 remaining
+[3/6] Creating engineered features...
+  → Created 19 engineered features for Brazil
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/brazil_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 0 columns for Brazil
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for Brazil
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/brazil_processed_normalized.csv
+
+Summary for Brazil:
+  Original shape: (25, 19)
+  Final shape: (96, 38)
+  Date range: 2000-03-31 00:00:00 to 2023-12-31 00:00:00
+  Remaining missing values: 3552
+
+============================================================
+Processing: Russia
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Russia from annual to quarterly (interpolated): (25, 17) → (96, 16)
+[2/6] Imputing missing data...
+  → Russia imputation: 1536 missing → 1536 remaining
+[3/6] Creating engineered features...
+  → Created 18 engineered features for Russia
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/russia_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 0 columns for Russia
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for Russia
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/russia_processed_normalized.csv
+
+Summary for Russia:
+  Original shape: (25, 17)
+  Final shape: (96, 35)
+  Date range: 2000-03-31 00:00:00 to 2023-12-31 00:00:00
+  Remaining missing values: 3264
+
+============================================================
+Processing: India
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled India from annual to quarterly (interpolated): (25, 14) → (96, 13)
+[2/6] Imputing missing data...
+  → India imputation: 1248 missing → 1248 remaining
+[3/6] Creating engineered features...
+  → Created 15 engineered features for India
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/india_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 0 columns for India
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for India
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/india_processed_normalized.csv
+
+Summary for India:
+  Original shape: (25, 14)
+  Final shape: (96, 29)
+  Date range: 2000-03-31 00:00:00 to 2023-12-31 00:00:00
+  Remaining missing values: 2688
+
+============================================================
+Processing: China
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled China from annual to quarterly (interpolated): (25, 20) → (96, 19)
+[2/6] Imputing missing data...
+  → China imputation: 1824 missing → 1824 remaining
+[3/6] Creating engineered features...
+  → Created 19 engineered features for China
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/china_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 0 columns for China
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for China
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/china_processed_normalized.csv
+
+Summary for China:
+  Original shape: (25, 20)
+  Final shape: (96, 39)
+  Date range: 2000-03-31 00:00:00 to 2023-12-31 00:00:00
+  Remaining missing values: 3648
+
+============================================================
+Processing: South Africa
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled South Africa from annual to quarterly (interpolated): (25, 18) → (96, 17)
+[2/6] Imputing missing data...
+  → South Africa imputation: 1632 missing → 1632 remaining
+[3/6] Creating engineered features...
+  → Created 18 engineered features for South Africa
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/south_africa_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 0 columns for South Africa
+[6/6] Analyzing stationarity...
+  ✓ Saved stationarity plot for South Africa
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/data_preprocessing/resampled_data/south_africa_processed_normalized.csv
+
+Summary for South Africa:
+  Original shape: (25, 18)
+  Final shape: (96, 36)
+  Date range: 2000-03-31 00:00:00 to 2023-12-31 00:00:00
+  Remaining missing values: 3360
+
+============================================================
+Creating combined datasets...
+============================================================
+  ✓ Saved G7 combined dataset: (722, 53)
+  ✓ Saved BRICS combined dataset: (480, 39)
+  ✓ Saved ALL countries combined dataset: (1202, 86)
+
+============================================================
+Generating preprocessing report...
+============================================================
+  ✓ Saved preprocessing summary

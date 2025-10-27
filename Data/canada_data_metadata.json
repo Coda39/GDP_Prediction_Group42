@@ -1,0 +1,104 @@
+{
+  "country": "canada",
+  "start_date": "2000-01-01",
+  "end_date": "2025-10-13",
+  "successful": [
+    [
+      "gdp_real",
+      "NGDPRSAXDCCAQ"
+    ],
+    [
+      "gdp_nominal",
+      "NGDPRSAXDCCAQ"
+    ],
+    [
+      "unemployment_rate",
+      "LRUNTTTTCAQ156S"
+    ],
+    [
+      "cpi_all_items",
+      "CPALTT01CAQ659N"
+    ],
+    [
+      "cpi_annual_growth",
+      "FPCPITOTLZGCAN"
+    ],
+    [
+      "interest_rate_short_term",
+      "IRSTCI01CAM156N"
+    ],
+    [
+      "interest_rate_long_term",
+      "IRLTLT01CAM156N"
+    ],
+    [
+      "industrial_production_index",
+      "PRMNTO01CAQ189S"
+    ],
+    [
+      "exports_volume",
+      "XTEXVA01CAQ188S"
+    ],
+    [
+      "imports_volume",
+      "XTIMVA01CAQ188S"
+    ],
+    [
+      "trade_balance",
+      "BPBLTT01CAQ188S"
+    ],
+    [
+      "household_consumption",
+      "NAEXKP02CAQ189S"
+    ],
+    [
+      "capital_formation",
+      "NAEXKP03CAQ189S"
+    ],
+    [
+      "employment_level",
+      "LCEAMN01CAQ189S"
+    ],
+    [
+      "money_supply_broad",
+      "MANMM101CAM189S"
+    ],
+    [
+      "exchange_rate_usd",
+      "CCUSMA02CAM618N"
+    ],
+    [
+      "stock_market_index",
+      "SPASTT01CAM661N"
+    ],
+    [
+      "government_spending",
+      "CANGFCEQDSNAQ"
+    ],
+    [
+      "population_total",
+      "POPTOTCAA647NWDB"
+    ],
+    [
+      "population_working_age",
+      "LFWA64TTCAM647S"
+    ]
+  ],
+  "failed": [],
+  "calculated": [],
+  "collection_timestamp": "2025-10-13T16:31:44.720867",
+  "total_columns": 20,
+  "successful_count": 20,
+  "failed_count": 0,
+  "data_completeness": "20/20",
+  "dataframe_shape": [
+    308,
+    20
+  ],
+  "date_range_actual": [
+    "2000-01-01 00:00:00",
+    "2025-08-01 00:00:00"
+  ],
+  "missing_values": 3155,
+  "data_coverage": "48.8%"
+}

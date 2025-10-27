@@ -1,0 +1,104 @@
+{
+  "country": "united kingdom",
+  "start_date": "2000-01-01",
+  "end_date": "2025-10-13",
+  "successful": [
+    [
+      "gdp_real",
+      "NGDPRSAXDCGBQ"
+    ],
+    [
+      "gdp_nominal",
+      "NGDPSAXDCGBQ"
+    ],
+    [
+      "unemployment_rate",
+      "LRUNTTTTGBQ156S"
+    ],
+    [
+      "cpi_all_items",
+      "CPALTT01GBQ659N"
+    ],
+    [
+      "cpi_annual_growth",
+      "FPCPITOTLZGGBR"
+    ],
+    [
+      "interest_rate_short_term",
+      "IRSTCI01GBM156N"
+    ],
+    [
+      "interest_rate_long_term",
+      "IRLTLT01GBM156N"
+    ],
+    [
+      "industrial_production_index",
+      "GBRPROINDMISMEI"
+    ],
+    [
+      "exports_volume",
+      "XTEXVA01GBQ188S"
+    ],
+    [
+      "imports_volume",
+      "XTIMVA01GBQ188S"
+    ],
+    [
+      "trade_balance",
+      "BPBLTT01GBQ188S"
+    ],
+    [
+      "household_consumption",
+      "NAEXKP02GBQ189S"
+    ],
+    [
+      "capital_formation",
+      "GBRGFCFQDSNAQ"
+    ],
+    [
+      "employment_level",
+      "SLEMPTOTLSPZSGBR"
+    ],
+    [
+      "money_supply_broad",
+      "MANMM101GBM189S"
+    ],
+    [
+      "exchange_rate_usd",
+      "CCUSMA02GBM618N"
+    ],
+    [
+      "stock_market_index",
+      "SPASTT01GBM661N"
+    ],
+    [
+      "government_spending",
+      "NCGGRSAXDCGBQ"
+    ],
+    [
+      "population_total",
+      "POPTOTGBA647NWDB"
+    ],
+    [
+      "population_working_age",
+      "LFWA64TTGBQ647S"
+    ]
+  ],
+  "failed": [],
+  "calculated": [],
+  "collection_timestamp": "2025-10-13T16:47:11.346660",
+  "total_columns": 20,
+  "successful_count": 20,
+  "failed_count": 0,
+  "data_completeness": "20/20",
+  "dataframe_shape": [
+    308,
+    20
+  ],
+  "date_range_actual": [
+    "2000-01-01 00:00:00",
+    "2025-08-01 00:00:00"
+  ],
+  "missing_values": 3228,
+  "data_coverage": "47.6%"
+}

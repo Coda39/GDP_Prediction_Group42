@@ -1,0 +1,104 @@
+{
+  "country": "italy",
+  "start_date": "2000-01-01",
+  "end_date": "2025-10-14",
+  "successful": [
+    [
+      "gdp_real",
+      "NGDPRSAXDCITQ"
+    ],
+    [
+      "gdp_nominal",
+      "CPMNACSCAB1GQIT"
+    ],
+    [
+      "unemployment_rate",
+      "LRUNTTTTITQ156S"
+    ],
+    [
+      "cpi_all_items",
+      "CPALTT01ITQ659N"
+    ],
+    [
+      "cpi_annual_growth",
+      "FPCPITOTLZGITA"
+    ],
+    [
+      "interest_rate_short_term",
+      "IRSTCI01ITM156N"
+    ],
+    [
+      "interest_rate_long_term",
+      "IRLTLT01ITM156N"
+    ],
+    [
+      "industrial_production_index",
+      "ITAPROINDMISMEI"
+    ],
+    [
+      "exports_volume",
+      "XTEXVA01ITQ188S"
+    ],
+    [
+      "imports_volume",
+      "XTIMVA01ITQ188S"
+    ],
+    [
+      "trade_balance",
+      "BPBLTT01ITQ188S"
+    ],
+    [
+      "household_consumption",
+      "NAEXKP02ITQ189S"
+    ],
+    [
+      "capital_formation",
+      "NAEXKP03ITQ189S"
+    ],
+    [
+      "employment_level",
+      "LREM64TTITQ156S"
+    ],
+    [
+      "money_supply_broad",
+      "MYAGM2ITM189N"
+    ],
+    [
+      "exchange_rate_usd",
+      "CCUSMA02ITM618N"
+    ],
+    [
+      "stock_market_index",
+      "SPASTT01ITM661N"
+    ],
+    [
+      "government_spending",
+      "NCGGRSAXDCITQ"
+    ],
+    [
+      "population_total",
+      "POPTOTITA647NWDB"
+    ],
+    [
+      "population_working_age",
+      "LFWA64TTITQ647S"
+    ]
+  ],
+  "failed": [],
+  "calculated": [],
+  "collection_timestamp": "2025-10-14T22:01:28.837225",
+  "total_columns": 20,
+  "successful_count": 20,
+  "failed_count": 0,
+  "data_completeness": "20/20",
+  "dataframe_shape": [
+    308,
+    20
+  ],
+  "date_range_actual": [
+    "2000-01-01 00:00:00",
+    "2025-08-01 00:00:00"
+  ],
+  "missing_values": 3441,
+  "data_coverage": "44.1%"
+}

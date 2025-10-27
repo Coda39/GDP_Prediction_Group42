@@ -1,0 +1,104 @@
+{
+  "country": "united states",
+  "start_date": "2000-01-01",
+  "end_date": "2025-10-10",
+  "successful": [
+    [
+      "gdp_real",
+      "GDPC1"
+    ],
+    [
+      "gdp_nominal",
+      "GDP"
+    ],
+    [
+      "unemployment_rate",
+      "UNRATE"
+    ],
+    [
+      "cpi_all_items",
+      "CPIAUCSL"
+    ],
+    [
+      "cpi_annual_growth",
+      "FPCPITOTLZGUSA"
+    ],
+    [
+      "interest_rate_short_term",
+      "DGS3MO"
+    ],
+    [
+      "interest_rate_long_term",
+      "DGS10"
+    ],
+    [
+      "industrial_production_index",
+      "INDPRO"
+    ],
+    [
+      "exports_volume",
+      "EXPGS"
+    ],
+    [
+      "imports_volume",
+      "IMPGS"
+    ],
+    [
+      "trade_balance",
+      "BOPGSTB"
+    ],
+    [
+      "household_consumption",
+      "PCE"
+    ],
+    [
+      "capital_formation",
+      "GPDI"
+    ],
+    [
+      "employment_level",
+      "PAYEMS"
+    ],
+    [
+      "money_supply_broad",
+      "M2SL"
+    ],
+    [
+      "exchange_rate_usd",
+      "DTWEXBGS"
+    ],
+    [
+      "stock_market_index",
+      "SP500"
+    ],
+    [
+      "government_spending",
+      "FGEXPND"
+    ],
+    [
+      "population_total",
+      "POP"
+    ],
+    [
+      "population_working_age",
+      "LFWA64TTUSM647S"
+    ]
+  ],
+  "failed": [],
+  "calculated": [],
+  "collection_timestamp": "2025-10-10T14:13:52.730121",
+  "total_columns": 20,
+  "successful_count": 20,
+  "failed_count": 0,
+  "data_completeness": "20/20",
+  "dataframe_shape": [
+    6812,
+    20
+  ],
+  "date_range_actual": [
+    "2000-01-01 00:00:00",
+    "2025-10-08 00:00:00"
+  ],
+  "missing_values": 112470,
+  "data_coverage": "17.4%"
+}

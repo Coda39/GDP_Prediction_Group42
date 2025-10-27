@@ -1,0 +1,101 @@
+{
+  "country": "Russia",
+  "country_code": "RU",
+  "source": "World Bank API",
+  "extraction_date": "2025-10-20T20:43:04.774647",
+  "date_range": [
+    "2000-01-01",
+    "2024-01-01"
+  ],
+  "total_indicators": 20,
+  "successful_indicators": 16,
+  "failed_indicators": 4,
+  "shape": [
+    25,
+    17
+  ],
+  "successful": [
+    [
+      "gdp_constant",
+      "NY.GDP.MKTP.KD"
+    ],
+    [
+      "gdp_current",
+      "NY.GDP.MKTP.CD"
+    ],
+    [
+      "gdp_growth",
+      "NY.GDP.MKTP.KD.ZG"
+    ],
+    [
+      "unemployment",
+      "SL.UEM.TOTL.ZS"
+    ],
+    [
+      "inflation",
+      "FP.CPI.TOTL.ZG"
+    ],
+    [
+      "exports",
+      "NE.EXP.GNFS.CD"
+    ],
+    [
+      "gross_capital_formation",
+      "NE.GDI.TOTL.CD"
+    ],
+    [
+      "trade_balance",
+      "NE.RSB.GNFS.CD"
+    ],
+    [
+      "population",
+      "SP.POP.TOTL"
+    ],
+    [
+      "urban_population",
+      "SP.URB.TOTL"
+    ],
+    [
+      "gni_per_capita",
+      "NY.GNP.PCAP.CD"
+    ],
+    [
+      "interest_rate",
+      "FR.INR.RINR"
+    ],
+    [
+      "exchange_rate",
+      "PA.NUS.FCRF"
+    ],
+    [
+      "fdi_inflows",
+      "BX.KLT.DINV.CD.WD"
+    ],
+    [
+      "manufacturing_value_added",
+      "NV.IND.MANF.CD"
+    ],
+    [
+      "services_value_added",
+      "NV.SRV.TOTL.CD"
+    ]
+  ],
+  "failed": [
+    [
+      "imports",
+      "NE.IMP.GNFS.CD"
+    ],
+    [
+      "household_consumption",
+      "NE.CON.PETC.CD"
+    ],
+    [
+      "government_expenditure",
+      "NE.CON.GOVT.CD"
+    ],
+    [
+      "external_debt",
+      "DT.DOD.DECT.CD"
+    ]
+  ]
+}

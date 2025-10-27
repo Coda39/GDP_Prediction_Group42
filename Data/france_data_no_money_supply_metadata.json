@@ -1,0 +1,104 @@
+{
+  "country": "france",
+  "start_date": "2000-01-01",
+  "end_date": "2025-10-14",
+  "successful": [
+    [
+      "gdp_real",
+      "NGDPRSAXDCFRQ"
+    ],
+    [
+      "gdp_nominal",
+      "CPMNACSCAB1GQFR"
+    ],
+    [
+      "unemployment_rate",
+      "LRUNTTTTFRQ156S"
+    ],
+    [
+      "cpi_all_items",
+      "CPALTT01FRQ659N"
+    ],
+    [
+      "cpi_annual_growth",
+      "FPCPITOTLZGFRA"
+    ],
+    [
+      "interest_rate_short_term",
+      "IRSTCI01FRM156N"
+    ],
+    [
+      "interest_rate_long_term",
+      "IRLTLT01FRM156N"
+    ],
+    [
+      "industrial_production_index",
+      "FRAPROINDMISMEI"
+    ],
+    [
+      "exports_volume",
+      "XTEXVA01FRQ188S"
+    ],
+    [
+      "imports_volume",
+      "XTIMVA01FRQ188S"
+    ],
+    [
+      "trade_balance",
+      "BPBLTT01FRQ188S"
+    ],
+    [
+      "household_consumption",
+      "NAEXKP02FRQ189S"
+    ],
+    [
+      "capital_formation",
+      "NAEXKP03FRQ189S"
+    ],
+    [
+      "employment_level",
+      "LREM25TTFRQ156S"
+    ],
+    [
+      "money_supply_broad",
+      "MYAGM2FRM189S"
+    ],
+    [
+      "exchange_rate_usd",
+      "CCUSMA02FRM618N"
+    ],
+    [
+      "stock_market_index",
+      "SPASTT01FRM661N"
+    ],
+    [
+      "government_spending",
+      "NCGGRSAXDCFRQ"
+    ],
+    [
+      "population_total",
+      "POPTOTFRA647NWDB"
+    ],
+    [
+      "population_working_age",
+      "SPPOPDPNDOLFRA"
+    ]
+  ],
+  "failed": [],
+  "calculated": [],
+  "collection_timestamp": "2025-10-14T21:40:05.580260",
+  "total_columns": 20,
+  "successful_count": 20,
+  "failed_count": 0,
+  "data_completeness": "20/20",
+  "dataframe_shape": [
+    308,
+    20
+  ],
+  "date_range_actual": [
+    "2000-01-01 00:00:00",
+    "2025-08-01 00:00:00"
+  ],
+  "missing_values": 3540,
+  "data_coverage": "42.5%"
+}
