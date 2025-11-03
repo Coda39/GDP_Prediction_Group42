@@ -1,0 +1,13 @@
+Data Quality Report: USA V6 (with Financial Indicators)
+Generated: 2025-10-31 02:41:58.417458
+======================================================================
+
+Features with missing data:
+
+stock_market_index                         143 / 180 ( 79.4%)
+trade_balance                               48 / 180 ( 26.7%)
+ted_spread                                  35 / 180 ( 19.4%)
+
+======================================================================
+Note: Missing data will be handled by preprocessing pipeline
+Strategies: forward-fill, interpolation, or feature dropping

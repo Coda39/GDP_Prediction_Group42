@@ -87,7 +87,7 @@ class PreprocessingPipeline:
         for country_file, country_name in G7_COUNTRIES.items():
             # Determine file path
             if country_file == 'united_states':
-                file_path = DATA_DIR / 'united_states_fred_data.csv'
+                file_path = DATA_DIR / 'united_states_fred_data_extended.csv'
             elif country_file in ['germany', 'france', 'italy']:
                 file_path = DATA_DIR / f'{country_file}_data_no_money_supply.csv'
             else:
@@ -284,6 +284,14 @@ class PreprocessingPipeline:
                 for lag in [1, 2, 4]:
                     df_featured[f'{indicator}_lag{lag}'] = df[indicator].shift(lag)
                     feature_count += 1
+        
+        # 3.5 Lagged GDP Growth Rates (Added for V4)
+        # These are lags of the GROWTH RATE, not the raw GDP level
+        if 'gdp_growth_yoy' in df_featured.columns:
+            df_featured['gdp_growth_yoy_lag1'] = df_featured['gdp_growth_yoy'].shift(1)
+            df_featured['gdp_growth_yoy_lag4'] = df_featured['gdp_growth_yoy'].shift(4)
+            feature_count += 2
+            self.log(f"  → Created lagged GDP growth features for {country_name}")
 
         # 4. Ratios
         if 'trade_balance' in df.columns and 'gdp_real' in df.columns:
@@ -319,8 +327,160 @@ class PreprocessingPipeline:
             if indicator in df.columns:
                 df_featured[f'{indicator}_diff'] = df[indicator].diff()
                 feature_count += 1
+        
+        # 7. Regime Detection Features (Added for V3)
+        # Helps detect economic regime changes (stable vs volatile, low vs high inflation)
+        # Critical for handling 2022-2025 test period which differs from 2001-2018 training
+        
+        if 'gdp_growth_yoy' in df_featured.columns:
+            # Volatility Indicators (detect unstable periods)
+            df_featured['gdp_volatility_4q'] = df_featured['gdp_growth_yoy'].rolling(window=4, min_periods=2).std()
+            feature_count += 1
+            
+        if 'stock_market_index' in df.columns:
+            df_featured['stock_volatility_4q'] = df['stock_market_index'].pct_change().rolling(window=4, min_periods=2).std()
+            feature_count += 1
+        
+        if 'gdp_growth_yoy' in df_featured.columns:
+            # Momentum Indicators (detect acceleration/deceleration)
+            df_featured['gdp_momentum'] = df_featured['gdp_growth_yoy'] - df_featured['gdp_growth_yoy'].shift(4)
+            feature_count += 1
+            
+        if 'cpi_annual_growth' in df.columns:
+            df_featured['inflation_momentum'] = df['cpi_annual_growth'] - df['cpi_annual_growth'].shift(4)
+            feature_count += 1
+        
+        if 'cpi_annual_growth' in df.columns:
+            # Regime Flags (binary indicators for different economic states)
+            df_featured['high_inflation_regime'] = (df['cpi_annual_growth'] > 2.5).astype(int)
+            feature_count += 1
+        
+        if 'gdp_volatility_4q' in df_featured.columns:
+            df_featured['high_volatility_regime'] = (df_featured['gdp_volatility_4q'] > df_featured['gdp_volatility_4q'].quantile(0.75)).astype(int)
+            feature_count += 1
+        
+        if 'cpi_annual_growth' in df.columns and 'gdp_volatility_4q' in df_featured.columns:
+            # Interaction Terms (capture regime-specific dynamics)
+            df_featured['inflation_x_volatility'] = df['cpi_annual_growth'] * df_featured['gdp_volatility_4q']
+            feature_count += 1
 
         self.log(f"  → Created {feature_count} engineered features for {country_name}")
+
+        # ====================================================================
+        # **V6 FINANCIAL FEATURES** (Extended Data with Financial Indicators)
+        # These are NOT GDP components - they're market prices that predict GDP
+        # ====================================================================
+        
+        self.log(f"  → Creating V6 financial features for {country_name}...")
+        v6_count = 0
+        
+        # 1. YIELD CURVE INDICATORS (Treasury market prices)
+        if 'interest_rate_10y' in df.columns and 'interest_rate_2y' in df.columns:
+            df_featured['yield_curve_slope'] = df['interest_rate_10y'] - df['interest_rate_2y']
+            df_featured['yield_curve_inverted'] = (df_featured['yield_curve_slope'] < 0).astype(int)
+            v6_count += 2
+            self.log(f"    ✓ Yield curve slope & inversion")
+        
+        if all(col in df.columns for col in ['interest_rate_10y', 'interest_rate_5y', 'interest_rate_2y']):
+            df_featured['yield_curve_curvature'] = (
+                df['interest_rate_10y'] - 2*df['interest_rate_5y'] + df['interest_rate_2y']
+            )
+            v6_count += 1
+            self.log(f"    ✓ Yield curve curvature")
+        
+        # 2. CREDIT MARKET INDICATORS (Corporate bond market prices)
+        if 'corporate_bond_baa' in df.columns and 'corporate_bond_aaa' in df.columns:
+            df_featured['credit_spread'] = df['corporate_bond_baa'] - df['corporate_bond_aaa']
+            df_featured['credit_spread_change'] = df_featured['credit_spread'].diff()
+            v6_count += 2
+            self.log(f"    ✓ Credit spread & change")
+        
+        # 3. FINANCIAL STRESS INDICATORS (Banking stress)
+        if 'ted_spread' in df.columns:
+            ted_mean = df['ted_spread'].rolling(window=20, min_periods=1).mean()
+            df_featured['high_financial_stress'] = (df['ted_spread'] > ted_mean).astype(int)
+            v6_count += 1
+            self.log(f"    ✓ Financial stress indicator")
+        
+        # 4. INTERACTION TERMS (Regime-specific dynamics)
+        if 'unemployment_rate' in df.columns and 'cpi_annual_growth' in df.columns:
+            df_featured['unemployment_x_inflation'] = df['unemployment_rate'] * df['cpi_annual_growth']
+            v6_count += 1
+            self.log(f"    ✓ Unemployment × Inflation")
+        
+        # 5. STOCK MARKET FEATURES (Now fixed with Yahoo Finance data!)
+        if 'stock_market_index' in df.columns:
+            df_featured['stock_returns_1q'] = df['stock_market_index'].pct_change(periods=1) * 100
+            df_featured['stock_volatility_4q_v6'] = df_featured['stock_returns_1q'].rolling(window=4, min_periods=1).std()
+            v6_count += 2
+            
+            if 'stock_volatility_4q_v6' in df_featured.columns:
+                df_featured['risk_adjusted_returns'] = df_featured['stock_returns_1q'] / (df_featured['stock_volatility_4q_v6'] + 0.01)
+                v6_count += 1
+            self.log(f"    ✓ Stock returns, volatility, risk-adjusted")
+        
+        # 6. SECOND-ORDER FEATURES (Momentum indicators - NO GDP to avoid circularity!)
+        if 'unemployment_rate' in df.columns:
+            df_featured['unemployment_momentum_v6'] = df['unemployment_rate'].diff()
+            df_featured['unemployment_vs_5y_avg'] = (
+                df['unemployment_rate'] - df['unemployment_rate'].rolling(window=20, min_periods=1).mean()
+            )
+            v6_count += 2
+            self.log(f"    ✓ Unemployment momentum & deviation")
+        
+        if 'cpi_annual_growth' in df.columns:
+            df_featured['inflation_acceleration_v6'] = df['cpi_annual_growth'].diff()
+            v6_count += 1
+            self.log(f"    ✓ Inflation acceleration")
+        
+        # 7. Z-SCORE INDICATORS (Normalized measures - NO GDP to avoid circularity!)
+        if 'cpi_annual_growth' in df.columns:
+            inflation_mean = df['cpi_annual_growth'].rolling(window=20, min_periods=5).mean()
+            inflation_std = df['cpi_annual_growth'].rolling(window=20, min_periods=5).std()
+            df_featured['inflation_z_score'] = (df['cpi_annual_growth'] - inflation_mean) / (inflation_std + 0.01)
+            v6_count += 1
+            self.log(f"    ✓ Inflation Z-score")
+        
+        # 8. COMPOSITE INDICES (Combine multiple indicators)
+        financial_indicators = []
+        if 'yield_curve_slope' in df_featured.columns:
+            financial_indicators.append('yield_curve_slope')
+        if 'credit_spread' in df_featured.columns:
+            financial_indicators.append('credit_spread')
+        if 'stock_returns_1q' in df_featured.columns:
+            financial_indicators.append('stock_returns_1q')
+        
+        if len(financial_indicators) >= 2:
+            temp_df = df_featured[financial_indicators].copy()
+            for col in temp_df.columns:
+                col_mean = temp_df[col].mean()
+                col_std = temp_df[col].std()
+                if col_std > 0:
+                    temp_df[col] = (temp_df[col] - col_mean) / col_std
+            df_featured['financial_conditions_index'] = temp_df.mean(axis=1)
+            v6_count += 1
+            self.log(f"    ✓ Financial conditions index ({len(financial_indicators)} components)")
+        
+        real_indicators = []
+        if 'building_permits' in df.columns:
+            real_indicators.append('building_permits')
+        if 'consumer_sentiment' in df.columns:
+            real_indicators.append('consumer_sentiment')
+        if 'capacity_utilization' in df.columns:
+            real_indicators.append('capacity_utilization')
+        
+        if len(real_indicators) >= 2:
+            temp_df = df_featured[real_indicators].copy()
+            for col in temp_df.columns:
+                col_mean = temp_df[col].mean()
+                col_std = temp_df[col].std()
+                if col_std > 0:
+                    temp_df[col] = (temp_df[col] - col_mean) / col_std
+            df_featured['real_activity_index'] = temp_df.mean(axis=1)
+            v6_count += 1
+            self.log(f"    ✓ Real activity index ({len(real_indicators)} components)")
+        
+        self.log(f"  → Created {v6_count} V6 features for {country_name} (NO GDP CIRCULARITY)")
 
         return df_featured
 
