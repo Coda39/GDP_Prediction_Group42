@@ -1,0 +1,406 @@
+# V2 Data Pipeline Configuration
+# FRED and OECD Indicators for GDP Forecasting & Nowcasting
+# Based on "A Quantitative Analyst's Guide to GDP Forecasting"
+
+# ============================================================================
+# FRED API CONFIGURATION (USA Data)
+# ============================================================================
+fred:
+  api_base: "https://api.stlouisfed.org/fred"
+  # Get API key from: https://fredaccount.stlouisfed.org/login
+  api_key: ${FRED_API_KEY} # Set as environment variable
+
+  # Target variable
+  target_variables:
+    GDPC1:
+      name: "Real GDP (Chained 2012 Dollars)"
+      frequency: "q" # quarterly
+      units: "Billions"
+      category: "target"
+
+  # ========================================================================
+  # HARD DATA: Production & Industry
+  # ========================================================================
+  hard_data_production:
+    INDPRO:
+      name: "Industrial Production Index"
+      frequency: "m" # monthly
+      category: "hard_data"
+      subcategory: "production"
+      timing: "coincident"
+    CUMFSL:
+      name: "Capacity Utilization: Total Industry"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "production"
+      timing: "coincident"
+    IMPGS:
+      name: "Imports of Goods and Services"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "trade"
+      timing: "coincident"
+    EXPGS:
+      name: "Exports of Goods and Services"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "trade"
+      timing: "coincident"
+
+  # ========================================================================
+  # HARD DATA: Labor Market
+  # ========================================================================
+  hard_data_labor:
+    AWHMBS:
+      name: "Average Weekly Hours of Production and Nonsupervisory Employees: Manufacturing"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "labor"
+      timing: "leading"
+    ICSA:
+      name: "Initial Claims"
+      frequency: "w" # weekly
+      category: "hard_data"
+      subcategory: "labor"
+      timing: "leading"
+    PAYEMS:
+      name: "Total Nonfarm Payroll"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "labor"
+      timing: "coincident"
+    UNRATE:
+      name: "Unemployment Rate"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "labor"
+      timing: "lagging"
+
+  # ========================================================================
+  # HARD DATA: Consumption & Income
+  # ========================================================================
+  hard_data_consumption:
+    RSXFS:
+      name: "Retail Sales"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "consumption"
+      timing: "coincident"
+    W875RX1:
+      name: "Real Personal Income Excluding Current Transfer Receipts"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "consumption"
+      timing: "coincident"
+    PSAVERT:
+      name: "Personal Saving Rate"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "consumption"
+      timing: "coincident"
+
+  # ========================================================================
+  # HARD DATA: Housing
+  # ========================================================================
+  hard_data_housing:
+    PERMIT:
+      name: "Building Permits: Total New Private Housing Units"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "housing"
+      timing: "leading"
+    HOUST:
+      name: "Total Housing Starts"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "housing"
+      timing: "leading"
+    TOTALSA:
+      name: "Total Housing Starts"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "housing"
+      timing: "leading"
+
+  # ========================================================================
+  # SOFT DATA: Purchasing Managers Index (PMI)
+  # ========================================================================
+  soft_data_pmi:
+    MMNRNJ:
+      name: "ISM Manufacturing PMI"
+      frequency: "m"
+      category: "soft_data"
+      subcategory: "pmi"
+      timing: "leading"
+    NAPMNPI:
+      name: "ISM Manufacturing New Orders Index"
+      frequency: "m"
+      category: "soft_data"
+      subcategory: "pmi"
+      timing: "leading"
+    IMNRNJ:
+      name: "ISM Services PMI"
+      frequency: "m"
+      category: "soft_data"
+      subcategory: "pmi"
+      timing: "leading"
+
+  # ========================================================================
+  # SOFT DATA: Consumer Sentiment & Confidence
+  # ========================================================================
+  soft_data_sentiment:
+    UMCSENT:
+      name: "University of Michigan: Consumer Sentiment Index"
+      frequency: "m"
+      category: "soft_data"
+      subcategory: "sentiment"
+      timing: "leading"
+    VIXCLS:
+      name: "CBOE Volatility Index: VIX (not sentiment, but soft financial)"
+      frequency: "d" # daily
+      category: "financial"
+      subcategory: "volatility"
+      timing: "leading"
+    CONFSL:
+      name: "Conference Board Consumer Confidence Index"
+      frequency: "m"
+      category: "soft_data"
+      subcategory: "sentiment"
+      timing: "leading"
+
+  # ========================================================================
+  # FINANCIAL DATA: Interest Rates & Yield Curve
+  # ========================================================================
+  financial_rates:
+    DGS10:
+      name: "10-Year Treasury Constant Maturity Rate"
+      frequency: "d"
+      category: "financial"
+      subcategory: "rates"
+      timing: "leading"
+    DGS2:
+      name: "2-Year Treasury Constant Maturity Rate"
+      frequency: "d"
+      category: "financial"
+      subcategory: "rates"
+      timing: "leading"
+    DGS3MO:
+      name: "3-Month Treasury Bill Secondary Market Rate"
+      frequency: "d"
+      category: "financial"
+      subcategory: "rates"
+      timing: "leading"
+    FEDFUNDS:
+      name: "Effective Federal Funds Rate"
+      frequency: "d"
+      category: "financial"
+      subcategory: "rates"
+      timing: "leading"
+
+  # ========================================================================
+  # FINANCIAL DATA: Yield Curve Spreads
+  # ========================================================================
+  financial_spreads:
+    T10Y2Y:
+      name: "10-Year Minus 2-Year Treasury Spread"
+      frequency: "d"
+      category: "financial"
+      subcategory: "spreads"
+      timing: "leading"
+    T10Y3M:
+      name: "10-Year Minus 3-Month Treasury Spread"
+      frequency: "d"
+      category: "financial"
+      subcategory: "spreads"
+      timing: "leading"
+    BAMLH0A0HYM2:
+      name: "BofA US High Yield OAS"
+      frequency: "d"
+      category: "financial"
+      subcategory: "spreads"
+      timing: "leading"
+
+  # ========================================================================
+  # FINANCIAL DATA: Equity Markets
+  # ========================================================================
+  financial_equity:
+    SP500:
+      name: "S&P 500 Index"
+      frequency: "d"
+      category: "financial"
+      subcategory: "equity"
+      timing: "leading"
+    VIXCLS:
+      name: "CBOE Volatility Index (VIX)"
+      frequency: "d"
+      category: "financial"
+      subcategory: "volatility"
+      timing: "leading"
+
+  # ========================================================================
+  # MONETARY DATA
+  # ========================================================================
+  monetary:
+    M2SL:
+      name: "Money Supply: M2"
+      frequency: "w"
+      category: "monetary"
+      subcategory: "money_supply"
+      timing: "coincident"
+    MMNRNJ:
+      name: "New Manufacturing Orders"
+      frequency: "m"
+      category: "hard_data"
+      subcategory: "production"
+      timing: "leading"
+
+  # ========================================================================
+  # INFLATION & PRICES
+  # ========================================================================
+  inflation:
+    CPIAUCSL:
+      name: "Consumer Price Index: All Urban Consumers"
+      frequency: "m"
+      category: "monetary"
+      subcategory: "inflation"
+      timing: "lagging"
+
+  # ========================================================================
+  # ALTERNATIVE DATA: Economic Policy Uncertainty
+  # ========================================================================
+  alternative_uncertainty:
+    USEPUINDXD:
+      name: "Economic Policy Uncertainty Index"
+      frequency: "d"
+      category: "alternative"
+      subcategory: "uncertainty"
+      timing: "leading"
+      # Source: www.policyuncertainty.com
+
+# ============================================================================
+# OECD API CONFIGURATION (G7 Countries)
+# ============================================================================
+oecd:
+  api_base: "https://stats.oecd.org/RestSDMX/sdmx.ashx/GetData"
+
+  # G7 Country Codes
+  countries:
+    - code: "USA"
+      name: "United States"
+    - code: "CAN"
+      name: "Canada"
+    - code: "JPN"
+      name: "Japan"
+    - code: "GBR"
+      name: "United Kingdom"
+    - code: "FRA"
+      name: "France"
+    - code: "DEU"
+      name: "Germany"
+    - code: "ITA"
+      name: "Italy"
+
+  # OECD QNA (Quarterly National Accounts)
+  indicators:
+    gdp:
+      dataset: "QNA"
+      measure: "VOBARSA" # Volume, seasonally adjusted
+      frequency: "q"
+      variable: "GDP"
+      name: "Real GDP"
+
+    consumption:
+      dataset: "QNA"
+      measure: "VOBARSA"
+      frequency: "q"
+      variable: "HFCEXP"
+      name: "Household Final Consumption Expenditure"
+
+    investment:
+      dataset: "QNA"
+      measure: "VOBARSA"
+      frequency: "q"
+      variable: "GFCF"
+      name: "Gross Fixed Capital Formation"
+
+    exports:
+      dataset: "QNA"
+      measure: "VOBARSA"
+      frequency: "q"
+      variable: "XGSV"
+      name: "Exports of Goods and Services"
+
+    imports:
+      dataset: "QNA"
+      measure: "VOBARSA"
+      frequency: "q"
+      variable: "MGSV"
+      name: "Imports of Goods and Services"
+
+    # Employment and Labor Market
+    employment:
+      dataset: "ALFS"
+      frequency: "q"
+      variable: "EMP"
+      name: "Employment"
+
+    unemployment:
+      dataset: "ALFS"
+      frequency: "q"
+      variable: "UNEMPRATE"
+      name: "Unemployment Rate"
+
+# ============================================================================
+# DATA COLLECTION PARAMETERS
+# ============================================================================
+collection:
+  # Date ranges
+  start_date: "2000-01-01"
+  end_date: "2025-12-31"
+
+  # API retry parameters
+  max_retries: 3
+  retry_delay: 2 # seconds
+  backoff_factor: 1.5
+
+  # Output directories
+  raw_fred_dir: "Data_v2/raw/fred"
+  raw_oecd_dir: "Data_v2/raw/oecd"
+  combined_dir: "Data_v2/combined"
+
+  # Logging
+  log_file: "Data_v2/logs/data_collection.log"
+  verbose: true
+
+# ============================================================================
+# FEATURE CATEGORIES (for preprocessing)
+# ============================================================================
+feature_categories:
+  leading_indicators:
+    description: "Features that lead the business cycle by 6-18 months"
+    used_in: ["forecasting"]
+    examples:
+      - "yield_curve_spread"
+      - "building_permits"
+      - "ism_new_orders"
+      - "initial_jobless_claims"
+      - "consumer_sentiment"
+      - "credit_spreads"
+
+  coincident_indicators:
+    description: "Features that move simultaneously with the economy"
+    used_in: ["nowcasting"]
+    examples:
+      - "payrolls"
+      - "industrial_production"
+      - "retail_sales"
+      - "personal_income"
+      - "trade_volumes"
+
+  lagging_indicators:
+    description: "Features that change after the economy has turned"
+    used_in: [] # Not used for forecasting
+    examples:
+      - "unemployment_rate"
+      - "cpi"
+      - "interest_rates"

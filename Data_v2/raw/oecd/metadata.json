@@ -1,0 +1,18 @@
+{
+  "source": "OECD",
+  "collection_timestamp": "2025-11-11T01:43:37.049143",
+  "countries": [
+    "USA",
+    "CAN",
+    "JPN",
+    "GBR",
+    "FRA",
+    "DEU",
+    "ITA"
+  ],
+  "date_range": [
+    "2000",
+    "2025"
+  ],
+  "total_series": 0
+}
