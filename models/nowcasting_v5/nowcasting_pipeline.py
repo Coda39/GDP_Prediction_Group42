@@ -89,7 +89,7 @@ plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
 
 # Directories
-DATA_DIR = Path(__file__).parent.parent.parent / 'data_preprocessing' / 'resampled_data'
+DATA_DIR = Path(__file__).parent.parent.parent / 'data_preprocessing' / 'outputs' / 'processed_data'
 OUTPUT_DIR = Path(__file__).parent / 'results'
 MODEL_DIR = Path(__file__).parent / 'saved_models'
 FIG_DIR = Path(__file__).parent / 'figures'

@@ -1,11 +1,19 @@
 """
-FRANCE DATA EXTENSION - Historical FRED + Bloomberg
+GERMANY DATA EXTENSION - Historical FRED + Bloomberg
 =====================================================
-1. Load base France data (2000-2025)
-2. Extend with FRED historical data (1980-2000)
-3. Add Bloomberg financial indicators (1999-2025)
+1. Load base Germany data (2000-2025)
+2. Extend with FRED historical data (1991-2000)
+3. Add Bloomberg financial indicators (1998-2025)
 
-Output: france_extended_with_bloomberg.csv (1980-2025)
+Input:
+- ../../Data/raw/germany_data_no_money_supply.csv
+- ../../Data/bloomberg/Europe Corporate.xlsx
+- ../../Data/bloomberg/Germany Gov 2Y.xlsx
+- ../../Data/bloomberg/Germany Gov 5Y.xlsx
+- ../../Data/bloomberg/Germany Gov 10Y.xlsx
+
+Output:
+- ../../Data/extended/germany_extended_with_bloomberg.csv (1991-2025)
 """
 
 import pandas as pd
@@ -24,46 +32,47 @@ FRED_API_KEY = '3477091a9ab79fb20b9ac8aca531d2dd'
 START_DATE = '1991-01-01'
 END_DATE = '2024-12-31'
 
-# FRED series for France - ALL economic indicators
+# FRED series for Germany - ALL economic indicators
 FRED_SERIES = {
     # GDP
-    'gdp_real': 'CLVMNACSCAB1GQFR',  # Real GDP (billions of 2015 euros, quarterly)
-    'gdp_nominal': 'CPMNACSCAB1GQFR',  # Nominal GDP (quarterly)
+    'gdp_real': 'CLVMNACSCAB1GQDE',  # Real GDP (billions of 2015 euros, quarterly)
+    'gdp_nominal': 'CPMNACSCAB1GQDE',  # Nominal GDP (quarterly)
     
     # Labor market
-    'unemployment_rate': 'LRHUTTTTFRQ156S',  # Unemployment rate
-    'employment_level': 'LMEMTTTTFRQ659S',  # Employment level (thousands)
+    'unemployment_rate': 'LRHUTTTTDEQ156S',  # Unemployment rate
+    'employment_level': 'LMEMTTTTDEQ659S',  # Employment level (thousands)
     
     # Prices
-    'cpi_all_items': 'FRACPIALLMINMEI',  # CPI all items (monthly → quarterly)
+    'cpi_all_items': 'DEUCPIALLMINMEI',  # CPI all items (monthly → quarterly)
     
     # Trade
-    'exports_volume': 'XTEXVA01FRQ188S',  # Exports volume index
-    'imports_volume': 'XTIMVA01FRQ188S',  # Imports volume index
+    'exports_volume': 'XTEXVA01DEQ188S',  # Exports volume index
+    'imports_volume': 'XTIMVA01DEQ188S',  # Imports volume index
     
     # Production
-    'industrial_production_index': 'FRAPROINDMISMEI',  # Industrial production
+    'industrial_production_index': 'DEUPRO INDMISMEI',  # Industrial production
     
     # Financial
-    'interest_rate_short_term': 'IRSTCI01FRM156N',  # Short-term interest rate
-    'interest_rate_long_term': 'IRLTLT01FRM156N',  # Long-term interest rate
-    'stock_market_index': 'FCHI',  # CAC 40 index
+    'interest_rate_short_term': 'IRSTCI01DEM156N',  # Short-term interest rate
+    'interest_rate_long_term': 'IRLTLT01DEM156N',  # Long-term interest rate
+    'stock_market_index': 'DAXINDX',  # DAX index
     
     # Other
-    'consumer_confidence': 'CSCICP03FRM665S',  # Consumer confidence
+    'consumer_confidence': 'CSCICP03DEM665S',  # Consumer confidence
 }
+
 # File paths
-DATA_DIR = Path('../../../Data')
-INPUT_CURRENT = DATA_DIR / 'france_data_no_money_supply.csv'
+DATA_DIR = Path('../../Data')
+INPUT_CURRENT = DATA_DIR / 'raw' / 'germany_data_no_money_supply.csv'
 BLOOMBERG_DIR = DATA_DIR / 'bloomberg'
-OUTPUT_PATH = DATA_DIR / 'france_extended_with_bloomberg.csv'
+OUTPUT_PATH = DATA_DIR / 'extended' / 'germany_extended_with_bloomberg.csv'
 
 # Bloomberg files
 BLOOMBERG_FILES = {
     'corporate': BLOOMBERG_DIR / 'Europe Corporate.xlsx',
-    'gov_2y': BLOOMBERG_DIR / 'France Gov 2Y.xlsx',
-    'gov_5y': BLOOMBERG_DIR / 'France Gov 5Y.xlsx',
-    'gov_10y': BLOOMBERG_DIR / 'France Gov 10Y.xlsx',
+    'gov_2y': BLOOMBERG_DIR / 'Germany Gov 2Y.xlsx',
+    'gov_5y': BLOOMBERG_DIR / 'Germany Gov 5Y.xlsx',
+    'gov_10y': BLOOMBERG_DIR / 'Germany Gov 10Y.xlsx',
 }
 
 # =============================================================================
@@ -71,7 +80,7 @@ BLOOMBERG_FILES = {
 # =============================================================================
 
 def download_fred_historical():
-    """Download ALL available FRED data for France (1980-2025)"""
+    """Download ALL available FRED data for Germany (1980-2025)"""
     print("="*80)
     print("STEP 1: Downloading FRED Historical Data (1980-2025)")
     print("="*80 + "\n")
@@ -104,7 +113,7 @@ def download_fred_historical():
     return df
 
 def load_base_data():
-    """Load current France data (2000-2025)"""
+    """Load current Germany data (2000-2025)"""
     print("\n" + "="*80)
     print("STEP 2: Loading Current OECD Data (2000-2025)")
     print("="*80 + "\n")
@@ -312,7 +321,7 @@ def save_output(df):
 
 def main():
     print("="*80)
-    print(" FRANCE DATA EXTENSION - FRED HISTORICAL + BLOOMBERG")
+    print(" GERMANY DATA EXTENSION - FRED HISTORICAL + BLOOMBERG")
     print("="*80)
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
     
@@ -343,7 +352,7 @@ def main():
     save_output(final)
     
     print("\n" + "="*80)
-    print(" ✓ FRANCE COMPLETE!")
+    print(" ✓ GERMANY COMPLETE!")
     print("="*80)
 
 if __name__ == '__main__':

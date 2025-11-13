@@ -1,11 +1,19 @@
 """
-Italy DATA EXTENSION - Historical FRED + Bloomberg
+ITALY DATA EXTENSION - Historical FRED + Bloomberg
 =====================================================
-1. Load base italy data (2000-2025)
-2. Extend with FRED historical data (1980-2000)
-3. Add Bloomberg financial indicators (1999-2025)
+1. Load base Italy data (2000-2025)
+2. Extend with FRED historical data (1991-2000)
+3. Add Bloomberg financial indicators (1998-2025)
 
-Output: italy_extended_with_bloomberg.csv (1980-2025)
+Input:
+- ../../Data/raw/italy_data_no_money_supply.csv
+- ../../Data/bloomberg/Europe Corporate.xlsx
+- ../../Data/bloomberg/Italy Gov 2Y.xlsx
+- ../../Data/bloomberg/Italy Gov 5Y.xlsx
+- ../../Data/bloomberg/Italy Gov 10Y.xlsx
+
+Output:
+- ../../Data/extended/italy_extended_with_bloomberg.csv (1991-2025)
 """
 
 import pandas as pd
@@ -54,10 +62,10 @@ FRED_SERIES = {
 }
 
 # File paths
-DATA_DIR = Path('../../../Data')
-INPUT_CURRENT = DATA_DIR / 'italy_data_no_money_supply.csv'
+DATA_DIR = Path('../../Data')
+INPUT_CURRENT = DATA_DIR / 'raw' / 'italy_data_no_money_supply.csv'
 BLOOMBERG_DIR = DATA_DIR / 'bloomberg'
-OUTPUT_PATH = DATA_DIR / 'italy_extended_with_bloomberg.csv'
+OUTPUT_PATH = DATA_DIR / 'extended' / 'italy_extended_with_bloomberg.csv'
 
 # Bloomberg files
 BLOOMBERG_FILES = {

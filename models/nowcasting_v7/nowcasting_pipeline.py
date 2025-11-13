@@ -70,7 +70,7 @@ plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
 
 # Directories
-DATA_DIR = Path(__file__).parent.parent.parent / 'data_preprocessing' / 'resampled_data'
+DATA_DIR = Path(__file__).parent.parent.parent / 'data_preprocessing' / 'outputs' / 'processed_data'
 OUTPUT_DIR = Path(__file__).parent / 'results'
 MODEL_DIR = Path(__file__).parent / 'saved_models'
 FIG_DIR = Path(__file__).parent / 'figures'
@@ -80,7 +80,7 @@ MODEL_DIR.mkdir(exist_ok=True)
 FIG_DIR.mkdir(exist_ok=True)
 
 # Focus countries (A+ quality from preprocessing)
-FOCUS_COUNTRIES = ['france'] 
+FOCUS_COUNTRIES = ['canada'] 
 
 # Features to drop
 DROP_FEATURES = ['money_supply_broad', 'm2_growth', 'country']

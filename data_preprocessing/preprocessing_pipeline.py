@@ -28,39 +28,45 @@ sns.set_palette("husl")
 
 # Directories
 DATA_DIR = Path(__file__).parent.parent / 'Data'
-OUTPUT_DIR = Path(__file__).parent / 'resampled_data'
-VIZ_DIR = Path(__file__).parent / 'preprocessing_figures'
-VIZ_DIR.mkdir(exist_ok=True)
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = Path(__file__).parent / 'outputs' / 'processed_data'
+VIZ_DIR = Path(__file__).parent / 'outputs' / 'figures'
+STATS_DIR = Path(__file__).parent / 'outputs' / 'stats'
+LOGS_DIR = Path(__file__).parent / 'outputs' / 'logs'
+
+# Create output directories
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+VIZ_DIR.mkdir(parents=True, exist_ok=True)
+STATS_DIR.mkdir(parents=True, exist_ok=True)
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 # G7 Countries configuration
 G7_COUNTRIES = {
     'USA': {
-        'file': 'historical/usa_extended_with_financial_1980-2024.csv',
+        'file': 'extended/usa_extended_with_financial_1980-2024.csv',
         'active': True
     },
     'Canada': {
-        'file': 'canada_extended_with_bloomberg.csv',  # Will be created
-        'active': True  # Set to True when ready
+        'file': 'extended/canada_extended_with_bloomberg.csv',
+        'active': True
     },
     'UK': {
-        'file': 'uk_extended_with_bloomberg.csv',
+        'file': 'extended/uk_extended_with_bloomberg.csv',
         'active': True
     },
     'Japan': {
-        'file': 'japan_extended_with_bloomberg.csv',
+        'file': 'extended/japan_extended_with_bloomberg.csv',
         'active': True
     },
     'Germany': {
-        'file': 'germany_extended_with_bloomberg.csv',
+        'file': 'extended/germany_extended_with_bloomberg.csv',
         'active': True
     },
     'France': {
-        'file': 'france_extended_with_bloomberg.csv',
+        'file': 'extended/france_extended_with_bloomberg.csv',
         'active': True
     },
     'Italy': {
-        'file': 'italy_extended_with_bloomberg.csv',
+        'file': 'extended/italy_extended_with_bloomberg.csv',
         'active': True
     }
 }
@@ -68,7 +74,7 @@ G7_COUNTRIES = {
 # Select which countries to process
 # CRITICAL: Process countries SEPARATELY to avoid cross-contamination
 # Set this to ['Canada'] when processing Canada, ['USA'] for USA, etc.
-COUNTRIES_TO_PROCESS = ['Italy']  # ← CHANGE THIS FOR EACH COUNTRY
+COUNTRIES_TO_PROCESS = ['Canada']  # ← CHANGE THIS FOR EACH COUNTRY
 
 # Indicator categorization for imputation strategy
 POLICY_INDICATORS = ['interest_rate_short_term', 'interest_rate_long_term', 
@@ -508,9 +514,9 @@ class PreprocessingPipeline:
 
         self.log(f"  → Normalized {len(normalization_stats)} columns for {country_name}")
 
-        # Save normalization statistics
+        # Save normalization statistics to STATS_DIR
         stats_df = pd.DataFrame(normalization_stats).T
-        stats_df.to_csv(OUTPUT_DIR / f'{country_name.lower()}_normalization_stats.csv')
+        stats_df.to_csv(STATS_DIR / f'{country_name.lower()}_normalization_stats.csv')
 
         return df_normalized
 
@@ -592,11 +598,13 @@ def main():
     print("\n" + "="*80)
     print("PREPROCESSING COMPLETE!")
     print(f"Processed datasets saved to: {OUTPUT_DIR}")
+    print(f"Normalization stats saved to: {STATS_DIR}")
+    print(f"Figures saved to: {VIZ_DIR}")
     print("="*80)
 
-    # Save log
-    log_file = OUTPUT_DIR / f'preprocessing_log_{"-".join(COUNTRIES_TO_PROCESS)}.txt'
-    with open(log_file, 'w') as f:
+    # Save log to LOGS_DIR
+    log_file = LOGS_DIR / f'preprocessing_log_{"-".join(COUNTRIES_TO_PROCESS)}.txt'
+    with open(log_file, 'w', encoding='utf-8') as f:
         f.write('\n'.join(pipeline.preprocessing_log))
     print(f"\nDetailed log saved to: {log_file}")
 

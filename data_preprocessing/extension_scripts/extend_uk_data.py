@@ -4,15 +4,15 @@ UK DATA EXTENSION - Add Bloomberg Financial Features
 Using Bloomberg Corporate Bond Index + Government Bonds + Historical Data
 
 Input:
-- ../../../Data/united_kingdom_data.csv (OECD base data 2000-2025)
-- ../../../Data/historical/uk_historical_1980-2000.csv (Historical 1980-2000)
-- ../../../Data/bloomberg/UK Corporate.xlsx
-- ../../../Data/bloomberg/UK Gov 2Y.xlsx
-- ../../../Data/bloomberg/UK Gov 5Y.xlsx
-- ../../../Data/bloomberg/UK Gov 10Y.xlsx
+- ../../Data/raw/united_kingdom_data.csv (OECD base data 2000-2025)
+- ../../Data/historical/uk_historical_1980-2000.csv (Historical 1980-2000)
+- ../../Data/bloomberg/UK Corporate.xlsx
+- ../../Data/bloomberg/UK Gov 2Y.xlsx
+- ../../Data/bloomberg/UK Gov 5Y.xlsx
+- ../../Data/bloomberg/UK Gov 10Y.xlsx
 
 Output:
-- ../../../Data/uk_extended_with_bloomberg.csv (Full 1980-2025)
+- ../../Data/extended/uk_extended_with_bloomberg.csv (Full 1980-2025)
 """
 
 import pandas as pd
@@ -38,11 +38,11 @@ FRED_SERIES = {
 }
 
 # File paths
-DATA_DIR = Path('../../../Data')
-INPUT_CURRENT = DATA_DIR / 'united_kingdom_data.csv'
+DATA_DIR = Path('../../Data')
+INPUT_CURRENT = DATA_DIR / 'raw' / 'united_kingdom_data.csv'
 INPUT_HISTORICAL = DATA_DIR / 'historical' / 'uk_historical_1980-2000.csv'
 BLOOMBERG_DIR = DATA_DIR / 'bloomberg'
-OUTPUT_PATH = DATA_DIR / 'uk_extended_with_bloomberg.csv'
+OUTPUT_PATH = DATA_DIR / 'extended' / 'uk_extended_with_bloomberg.csv'
 
 # Bloomberg files
 BLOOMBERG_FILES = {

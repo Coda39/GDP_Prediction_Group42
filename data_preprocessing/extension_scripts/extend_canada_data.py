@@ -1,20 +1,18 @@
 """
-JAPAN DATA EXTENSION - Add Bloomberg Financial Features
-========================================================
-Using Bloomberg Corporate Bond Index + Government Bonds + Historical Data
+CANADA DATA EXTENSION - Add Bloomberg Financial Features
+=========================================================
+V3: Using Bloomberg Corporate Bond Index + Government Bonds + Historical Data
 
 Input:
-- ../../../Data/japan_data.csv (OECD base data 2000-2025)
-- ../../../Data/historical/japan_historical_1980-2000.csv (Historical 1980-2000)
-- ../../../Data/bloomberg/Japan Corporate.xlsx
-- ../../../Data/bloomberg/Japan Gov 2Y.xlsx
-- ../../../Data/bloomberg/Japan Gov 5Y.xlsx
-- ../../../Data/bloomberg/Japan Gov 10Y.xlsx
+- ../../Data/raw/canada_data.csv (OECD base data 2000-2025)
+- ../../Data/historical/canada_historical_1980-2000.csv (Historical 1980-2000)
+- ../../Data/bloomberg/Canada Corporate.xlsx
+- ../../Data/bloomberg/Canada Gov 2Y.xlsx
+- ../../Data/bloomberg/Canada Gov 5Y.xlsx
+- ../../Data/bloomberg/Canada Gov 10Y.xlsx
 
 Output:
-- ../../../Data/japan_extended_with_bloomberg.csv (Full 1980-2025)
-
-NOTE: Japan had negative interest rates 2016-2024 (BOJ policy) - this is REAL data!
+- ../../Data/extended/canada_extended_with_bloomberg.csv (Full 1980-2025)
 """
 
 import pandas as pd
@@ -33,25 +31,26 @@ FRED_API_KEY = '3477091a9ab79fb20b9ac8aca531d2dd'
 START_DATE = '1980-01-01'
 END_DATE = '2024-12-31'
 
-# FRED series for Japan (if available)
+# FRED series (keep existing ones that work)
 FRED_SERIES = {
-    'industrial_production_japan': 'JPNPROINDMISMEI',  # Japan Industrial Production
-    'consumer_confidence_japan': 'CSCICP03JPM665S',  # Japan Consumer Confidence
+    'consumer_sentiment': 'CSCICP03CAM665S',
+    'employment_level': 'LFEMTTTTCAM647S',
+    'building_permits': 'CANODCNPI03GPSAM',
 }
 
 # File paths
-DATA_DIR = Path('../../../Data')
-INPUT_CURRENT = DATA_DIR / 'japan_data.csv'
-INPUT_HISTORICAL = DATA_DIR / 'historical' / 'japan_historical_1980-2000.csv'
+DATA_DIR = Path('../../Data')
+INPUT_CURRENT = DATA_DIR / 'raw' / 'canada_data.csv'
+INPUT_HISTORICAL = DATA_DIR / 'historical' / 'canada_historical_1980-2000.csv'
 BLOOMBERG_DIR = DATA_DIR / 'bloomberg'
-OUTPUT_PATH = DATA_DIR / 'japan_extended_with_bloomberg.csv'
+OUTPUT_PATH = DATA_DIR / 'extended' / 'canada_extended_with_bloomberg.csv'
 
 # Bloomberg files
 BLOOMBERG_FILES = {
-    'corporate': BLOOMBERG_DIR / 'Japan Corporate.xlsx',  # LJP1TRUU (1-3Y bonds)
-    'gov_2y': BLOOMBERG_DIR / 'Japan Gov 2Y.xlsx',
-    'gov_5y': BLOOMBERG_DIR / 'Japan Gov 5Y.xlsx',
-    'gov_10y': BLOOMBERG_DIR / 'Japan Gov 10Y.xlsx',
+    'corporate': BLOOMBERG_DIR / 'Canada Corporate.xlsx',
+    'gov_2y': BLOOMBERG_DIR / 'Canada Gov 2Y.xlsx',
+    'gov_5y': BLOOMBERG_DIR / 'Canada Gov 5Y.xlsx',
+    'gov_10y': BLOOMBERG_DIR / 'Canada Gov 10Y.xlsx',
 }
 
 # =============================================================================
@@ -59,7 +58,7 @@ BLOOMBERG_FILES = {
 # =============================================================================
 
 def load_and_merge_base_data():
-    """Load and merge historical + current Japan data"""
+    """Load and merge historical + current Canada data"""
     print("="*80)
     print("STEP 1: Loading & Merging Base Data")
     print("="*80 + "\n")
@@ -85,13 +84,7 @@ def load_and_merge_base_data():
     print(f"  ✓ Shape: {df_historical.shape}")
     print(f"    Range: {df_historical.index[0].date()} to {df_historical.index[-1].date()}")
     
-    # EXCLUDE YEAR 2000 FROM CURRENT (to avoid overwriting historical)
-    print(f"\nExcluding year 2000 from current file (will use historical version)...")
-    df_current = df_current[df_current.index.year >= 2001]
-    print(f"  ✓ Current file after exclusion: {df_current.shape}")
-    print(f"    New range: {df_current.index[0].date()} to {df_current.index[-1].date()}")
-    
-    # Merge (historical first, current fills in after)
+    # Merge (historical first, then current - current overwrites on duplicates)
     print("\nMerging historical + current...")
     merged = pd.concat([df_historical, df_current], axis=0)
     merged = merged[~merged.index.duplicated(keep='last')].sort_index()
@@ -102,41 +95,6 @@ def load_and_merge_base_data():
     
     return merged
 
-def fix_unit_mismatch(df):
-    """Fix GDP unit mismatch between historical and current data"""
-    print("\n" + "="*80)
-    print("STEP 1.5: Fixing GDP Unit Mismatch")
-    print("="*80 + "\n")
-    
-    # Check for the discontinuity
-    gdp_cols = [col for col in df.columns if 'gdp' in col.lower()]
-    
-    for col in gdp_cols:
-        if col not in df.columns:
-            continue
-            
-        # Find values before and after 2001 (includes year 2000 in "before")
-        before_2001 = df[df.index < '2001-01-01'][col].dropna()
-        after_2001 = df[df.index >= '2001-01-01'][col].dropna()
-        
-        if len(before_2001) > 0 and len(after_2001) > 0:
-            ratio = after_2001.mean() / before_2001.mean()
-            
-            # If ratio is > 100, historical data is in different units
-            if ratio > 100:
-                print(f"  {col}:")
-                print(f"    Before 2001 mean: {before_2001.mean():,.0f}")
-                print(f"    After 2001 mean: {after_2001.mean():,.0f}")
-                print(f"    Calculated ratio: {ratio:.2f}x")
-                
-                # Scale everything before 2001 (includes year 2000!)
-                df.loc[df.index < '2001-01-01', col] = df.loc[df.index < '2001-01-01', col] * ratio
-                
-                print(f"    ✓ Scaled data before 2001 by {ratio:.2f}x")
-                print(f"    New before 2001 mean: {df[df.index < '2001-01-01'][col].mean():,.0f}")
-    
-    return df
-    
 def load_bloomberg_file(filepath, series_name):
     """Load a Bloomberg Excel export and return clean Series"""
     print(f"  Loading {filepath.name}...", end=' ')
@@ -163,12 +121,7 @@ def load_bloomberg_file(filepath, series_name):
         series = series.sort_index()
         series = series[~series.index.duplicated(keep='last')]
         
-        # Check for negative values (NORMAL for Japan!)
-        n_negative = (series < 0).sum()
-        if n_negative > 0:
-            print(f"✓ {len(series)} obs ({series.index.min().year}-{series.index.max().year}) [{n_negative} negative - NORMAL for Japan!]")
-        else:
-            print(f"✓ {len(series)} obs ({series.index.min().year}-{series.index.max().year})")
+        print(f"✓ {len(series)} obs ({series.index.min().year}-{series.index.max().year})")
         return series
         
     except Exception as e:
@@ -180,8 +133,6 @@ def load_all_bloomberg():
     print("\n" + "="*80)
     print("STEP 2: Loading Bloomberg Bond Data")
     print("="*80 + "\n")
-    print("NOTE: Japan had negative interest rates 2016-2024 (BOJ NIRP policy)")
-    print("      Negative values are REAL economic data, not errors!\n")
     
     bloomberg_data = {}
     
@@ -199,12 +150,6 @@ def load_all_bloomberg():
     print(f"\n✓ Loaded {len(bloomberg_data)} Bloomberg series")
     print(f"  Shape: {df.shape}")
     print(f"  Date range: {df.index.min().date()} to {df.index.max().date()}")
-    
-    # Show negative rate periods
-    if 'gov_10y' in df.columns:
-        negative_periods = df[df['gov_10y'] < 0]
-        if len(negative_periods) > 0:
-            print(f"  Negative 10Y rates: {negative_periods.index.min().date()} to {negative_periods.index.max().date()} (BOJ NIRP)")
     
     return df
 
@@ -253,19 +198,16 @@ def calculate_financial_indicators(bloomberg_df):
     calculated = []
     
     # Credit Spread (Corporate - Government 10Y)
-    # NOTE: Japan corporate is 1-3Y bonds, so this is short-term credit spread
     if 'corporate' in bloomberg_quarterly.columns and 'gov_10y' in bloomberg_quarterly.columns:
         indicators['credit_spread'] = bloomberg_quarterly['corporate'] - bloomberg_quarterly['gov_10y']
         n_valid = indicators['credit_spread'].notna().sum()
-        calculated.append(f"credit_spread (1-3Y corporate - 10Y): {n_valid} obs")
+        calculated.append(f"credit_spread (corporate - 10Y): {n_valid} obs")
     
     # Yield Curve Slope (10Y - 2Y)
     if 'gov_10y' in bloomberg_quarterly.columns and 'gov_2y' in bloomberg_quarterly.columns:
         indicators['yield_curve_slope'] = bloomberg_quarterly['gov_10y'] - bloomberg_quarterly['gov_2y']
         n_valid = indicators['yield_curve_slope'].notna().sum()
-        # Note: Can be negative when curve is inverted!
-        n_inverted = (indicators['yield_curve_slope'] < 0).sum()
-        calculated.append(f"yield_curve_slope (10Y - 2Y): {n_valid} obs ({n_inverted} inverted)")
+        calculated.append(f"yield_curve_slope (10Y - 2Y): {n_valid} obs")
     
     # Yield Curve Curvature (10Y - 2*5Y + 2Y)
     if all(col in bloomberg_quarterly.columns for col in ['gov_10y', 'gov_5y', 'gov_2y']):
@@ -396,17 +338,16 @@ def save_output(df):
 
 def main():
     print("="*80)
-    print(" JAPAN DATA EXTENSION - BLOOMBERG FINANCIAL INDICATORS")
+    print(" CANADA DATA EXTENSION - BLOOMBERG FINANCIAL INDICATORS")
     print("="*80)
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("\nMerging THREE data sources:")
     print("  1. Historical data (1980-2000)")
     print("  2. Current OECD data (2000-2025)")
-    print("  3. Bloomberg bond data (1987-2025)")
+    print("  3. Bloomberg bond data (1989-2025)")
     print("\nFinancial indicators from Bloomberg:")
-    print("  ✓ Japan Corporate Bond Index 1-3Y (LJP1TRUU)")
-    print("  ✓ Japan Government Bonds (2Y, 5Y, 10Y)")
-    print("\n⚠️  NOTE: Japan negative rates 2016-2024 are REAL (BOJ NIRP policy)")
+    print("  ✓ Canada Corporate Bond Index (I05510CA)")
+    print("  ✓ Canada Government Bonds (2Y, 5Y, 10Y)")
     print("="*80 + "\n")
     
     # Load and merge base data (historical + current)
@@ -415,10 +356,7 @@ def main():
         print("\n❌ ERROR: No base data loaded! Cannot proceed.")
         return
     
-    # FIX THE UNIT MISMATCH!
-    base = fix_unit_mismatch(base)  # ← ADD THIS LINE
-
-    # Resample base to quarterly FIRST
+    # ⚡ RESAMPLE BASE TO QUARTERLY FIRST!
     base_quarterly = resample_to_quarterly(base)
     
     # Load Bloomberg data
@@ -458,17 +396,16 @@ def main():
     print("="*80)
     print(f"\nOutput: {OUTPUT_PATH}")
     print("\n📊 Next Steps:")
-    print("  1. Update preprocessing_pipeline.py:")
-    print("     G7_COUNTRIES['Japan']['file'] = 'japan_extended_with_bloomberg.csv'")
-    print("     G7_COUNTRIES['Japan']['active'] = True")
-    print("     COUNTRIES_TO_PROCESS = ['Japan']")
+    print("  1. Review output: Open CSV and check coverage")
     print("  2. Run preprocessing: cd ../../ && python preprocessing_pipeline.py")
-    print("  3. Test model: cd ../models/nowcasting_v7 && python nowcasting_pipeline.py")
+    print("  3. Test model: cd ../../models/nowcasting_v7 && python nowcasting_pipeline.py")
     print("\n💡 Expected data coverage:")
-    print("  1980-1987: Historical data only")
-    print("  1987-2025: Full coverage (corporate + government bonds)")
-    print("\n🎌 Japan has longest corporate bond coverage! (1987 vs Canada 2002, UK 1998)")
+    print("  1980-1989: Historical data only (no Bloomberg corporate yet)")
+    print("  1989-2002: Historical + Gov bonds (corporate starts 2002)")
+    print("  2002-2025: Full coverage (all indicators)")
+    print("\n🎯 Model will use complete periods for training/testing")
     print("="*80)
-
+    
 if __name__ == '__main__':
     main()
+
