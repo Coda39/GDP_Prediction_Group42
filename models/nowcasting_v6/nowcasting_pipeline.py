@@ -91,7 +91,7 @@ MODEL_DIR.mkdir(exist_ok=True)
 FIG_DIR.mkdir(exist_ok=True)
 
 # Focus countries (A+ quality from preprocessing)
-FOCUS_COUNTRIES = ['USA'] 
+FOCUS_COUNTRIES = ['japan'] 
 
 # Features to drop
 DROP_FEATURES = ['money_supply_broad', 'm2_growth', 'country']

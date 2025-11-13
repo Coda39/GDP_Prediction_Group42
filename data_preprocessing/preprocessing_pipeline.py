@@ -1,7 +1,7 @@
 """
 Data Preprocessing Pipeline for GDP Nowcasting Project
 =======================================================
-This script implements comprehensive preprocessing for G7 and BRICS economic data.
+This script implements comprehensive preprocessing for G7 economic data.
 
 Preprocessing Steps:
 1. Frequency harmonization (resample to quarterly)
@@ -31,29 +31,49 @@ DATA_DIR = Path(__file__).parent.parent / 'Data'
 OUTPUT_DIR = Path(__file__).parent / 'resampled_data'
 VIZ_DIR = Path(__file__).parent / 'preprocessing_figures'
 VIZ_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR.mkdir(exist_ok=True)
 
-# Country lists
+# G7 Countries configuration
 G7_COUNTRIES = {
-    'united_states': 'USA',
-    'canada': 'Canada',
-    'france': 'France',
-    'germany': 'Germany',
-    'italy': 'Italy',
-    'japan': 'Japan',
-    'united_kingdom': 'UK'
+    'USA': {
+        'file': 'historical/usa_extended_with_financial_1980-2024.csv',
+        'active': True
+    },
+    'Canada': {
+        'file': 'canada_extended_with_bloomberg.csv',  # Will be created
+        'active': True  # Set to True when ready
+    },
+    'UK': {
+        'file': 'uk_extended_with_bloomberg.csv',
+        'active': True
+    },
+    'Japan': {
+        'file': 'japan_extended_with_bloomberg.csv',
+        'active': True
+    },
+    'Germany': {
+        'file': 'germany_extended_with_bloomberg.csv',
+        'active': True
+    },
+    'France': {
+        'file': 'france_extended_with_bloomberg.csv',
+        'active': True
+    },
+    'Italy': {
+        'file': 'italy_extended_with_bloomberg.csv',
+        'active': True
+    }
 }
 
-BRICS_COUNTRIES = {
-    'brazil': 'Brazil',
-    'russia': 'Russia',
-    'india': 'India',
-    'china': 'China',
-    'south_africa': 'South Africa'
-}
+# Select which countries to process
+# CRITICAL: Process countries SEPARATELY to avoid cross-contamination
+# Set this to ['Canada'] when processing Canada, ['USA'] for USA, etc.
+COUNTRIES_TO_PROCESS = ['Italy']  # ← CHANGE THIS FOR EACH COUNTRY
 
 # Indicator categorization for imputation strategy
-POLICY_INDICATORS = ['interest_rate_short_term', 'interest_rate_long_term']
-STOCK_INDICATORS = ['stock_market_index']
+POLICY_INDICATORS = ['interest_rate_short_term', 'interest_rate_long_term', 
+                     'overnight_rate', 'federal_funds_rate']
+STOCK_INDICATORS = ['stock_market_index', 'sp500_index']
 ECONOMIC_INDICATORS = ['gdp_real', 'gdp_nominal', 'industrial_production_index',
                        'exports_volume', 'imports_volume', 'household_consumption',
                        'capital_formation', 'employment_level', 'money_supply_broad',
@@ -80,47 +100,43 @@ class PreprocessingPipeline:
             print(message)
         self.preprocessing_log.append(message)
 
-    def load_g7_data(self):
-        """Load G7 data from CSV files"""
-        g7_data = {}
-
-        for country_file, country_name in G7_COUNTRIES.items():
-            # Determine file path
-            if country_file == 'united_states':
-                file_path = DATA_DIR / 'united_states_fred_data_extended.csv'
-            elif country_file in ['germany', 'france', 'italy']:
-                file_path = DATA_DIR / f'{country_file}_data_no_money_supply.csv'
-            else:
-                file_path = DATA_DIR / f'{country_file}_data.csv'
-
+    def load_country_data(self, countries_to_process):
+        """
+        Load data for specified countries
+        
+        Parameters:
+        - countries_to_process: list of country names to process
+        """
+        country_data = {}
+        
+        for country in countries_to_process:
+            if country not in G7_COUNTRIES:
+                self.log(f"⚠ {country} not in G7_COUNTRIES configuration")
+                continue
+                
+            config = G7_COUNTRIES[country]
+            if not config['active']:
+                self.log(f"⚠ {country} is not active - skipping")
+                continue
+                
+            file_path = DATA_DIR / config['file']
+            
             if file_path.exists():
                 df = pd.read_csv(file_path)
+                
+                # Handle date column
                 date_col = df.columns[0]
                 df[date_col] = pd.to_datetime(df[date_col])
                 df = df.rename(columns={date_col: 'date'})
                 df = df.set_index('date')
-                df['country'] = country_name
-                g7_data[country_name] = df
-                self.log(f"✓ Loaded {country_name}: {df.shape}")
-
-        return g7_data
-
-    def load_brics_data(self):
-        """Load BRICS data from CSV files"""
-        brics_data = {}
-
-        for country_file, country_name in BRICS_COUNTRIES.items():
-            file_path = DATA_DIR / f'{country_file}_worldbank_data.csv'
-
-            if file_path.exists():
-                df = pd.read_csv(file_path)
-                df['date'] = pd.to_datetime(df['date'])
-                df = df.set_index('date')
-                df['country'] = country_name
-                brics_data[country_name] = df
-                self.log(f"✓ Loaded {country_name}: {df.shape}")
-
-        return brics_data
+                df['country'] = country
+                
+                country_data[country] = df
+                self.log(f"✓ Loaded {country}: {df.shape} from {config['file']}")
+            else:
+                self.log(f"✗ File not found for {country}: {file_path}")
+                
+        return country_data
 
     def resample_to_quarterly(self, df, method='last', country_name=''):
         """
@@ -143,28 +159,21 @@ class PreprocessingPipeline:
         freq = pd.infer_freq(df.index)
 
         if freq and ('D' in freq or 'B' in freq):  # Daily or business daily
-            # Resample daily to quarterly (end of quarter)
             df_quarterly = df.resample('QE').last()
             self.log(f"  → Resampled {country_name} from daily to quarterly: {original_shape} → {df_quarterly.shape}")
 
         elif freq and 'M' in freq:  # Monthly
-            # Resample monthly to quarterly (end of quarter)
             df_quarterly = df.resample('QE').last()
             self.log(f"  → Resampled {country_name} from monthly to quarterly: {original_shape} → {df_quarterly.shape}")
 
         elif freq and ('Y' in freq or 'A' in freq):  # Annual
-            # Upsample annual to quarterly using interpolation
-            # First, create quarterly index spanning the data range
             start_date = df.index.min()
             end_date = df.index.max()
             quarterly_index = pd.date_range(start=start_date, end=end_date, freq='QE')
-
-            # Reindex to quarterly
             df_quarterly = df.reindex(quarterly_index)
 
-            # Interpolate using cubic spline for smooth transition
             for col in df_quarterly.columns:
-                if df_quarterly[col].notna().sum() > 3:  # Need at least 4 points for cubic
+                if df_quarterly[col].notna().sum() > 3:
                     df_quarterly[col] = df_quarterly[col].interpolate(method='cubic', limit_direction='both')
                 else:
                     df_quarterly[col] = df_quarterly[col].interpolate(method='linear', limit_direction='both')
@@ -172,7 +181,6 @@ class PreprocessingPipeline:
             self.log(f"  → Resampled {country_name} from annual to quarterly (interpolated): {original_shape} → {df_quarterly.shape}")
 
         else:
-            # Already quarterly or irregular frequency - just ensure quarter-end alignment
             df_quarterly = df.resample('QE').last()
             self.log(f"  → Aligned {country_name} to quarter-end dates: {original_shape} → {df_quarterly.shape}")
 
@@ -185,12 +193,6 @@ class PreprocessingPipeline:
     def impute_missing_data(self, df, country_name=''):
         """
         Impute missing data using intelligent strategies based on indicator type
-
-        Strategy:
-        - Policy rates: Forward-fill (rates persist until changed)
-        - Stock indices: Forward-fill (carry last observation)
-        - Economic volumes: Interpolation (linear/cubic)
-        - Rates/percentages: Interpolation
         """
         original_missing = df.isnull().sum().sum()
         df_imputed = df.copy()
@@ -205,25 +207,20 @@ class PreprocessingPipeline:
 
             # Determine imputation strategy
             if col in POLICY_INDICATORS or col in STOCK_INDICATORS:
-                # Forward-fill for policy rates and stock indices
                 df_imputed[col] = df_imputed[col].fillna(method='ffill')
-                # If still missing at start, backfill
                 df_imputed[col] = df_imputed[col].fillna(method='bfill')
                 method_used = 'forward-fill'
 
             elif col in ECONOMIC_INDICATORS or col in RATE_INDICATORS or col in TRADE_INDICATORS:
-                # Interpolate for economic indicators
                 if df_imputed[col].notna().sum() > 3:
                     df_imputed[col] = df_imputed[col].interpolate(method='cubic', limit_direction='both')
                 else:
                     df_imputed[col] = df_imputed[col].interpolate(method='linear', limit_direction='both')
 
-                # Fill any remaining with forward/backward fill
                 df_imputed[col] = df_imputed[col].fillna(method='ffill').fillna(method='bfill')
                 method_used = 'interpolation'
 
             else:
-                # Default: linear interpolation + forward-fill
                 df_imputed[col] = df_imputed[col].interpolate(method='linear', limit_direction='both')
                 df_imputed[col] = df_imputed[col].fillna(method='ffill').fillna(method='bfill')
                 method_used = 'default'
@@ -276,8 +273,8 @@ class PreprocessingPipeline:
 
         # 3. Lagged features (t-1, t-2, t-4)
         lag_indicators = ['gdp_real', 'gdp_constant', 'unemployment_rate', 'unemployment',
-                         'cpi_annual_growth', 'inflation', 'industrial_production_index',
-                         'interest_rate_short_term', 'interest_rate']
+                        'cpi_annual_growth', 'inflation', 'industrial_production_index',
+                        'interest_rate_short_term', 'interest_rate']
 
         for indicator in lag_indicators:
             if indicator in df.columns:
@@ -321,7 +318,7 @@ class PreprocessingPipeline:
 
         # 6. Differences (for non-stationary series)
         diff_indicators = ['gdp_real', 'gdp_constant', 'employment_level',
-                          'industrial_production_index']
+                        'industrial_production_index']
 
         for indicator in diff_indicators:
             if indicator in df.columns:
@@ -394,6 +391,11 @@ class PreprocessingPipeline:
             df_featured['credit_spread_change'] = df_featured['credit_spread'].diff()
             v6_count += 2
             self.log(f"    ✓ Credit spread & change")
+
+        elif 'credit_spread' in df_featured.columns and 'credit_spread_change' not in df_featured.columns:
+            df_featured['credit_spread_change'] = df_featured['credit_spread'].diff()
+            v6_count += 1
+            self.log(f"    ✓ Credit spread change (from existing credit_spread)")
         
         # 3. FINANCIAL STRESS INDICATORS (Banking stress)
         if 'ted_spread' in df.columns:
@@ -486,117 +488,35 @@ class PreprocessingPipeline:
 
     def normalize_data(self, df, country_name='', exclude_cols=None):
         """
-        Normalize data using z-score standardization (per country)
-
-        Parameters:
-        - df: DataFrame to normalize
-        - country_name: for logging
-        - exclude_cols: list of columns to exclude from normalization (e.g., 'country')
+        Normalize data using z-score standardization (PER COUNTRY - CRITICAL!)
         """
         if exclude_cols is None:
             exclude_cols = ['country']
 
         df_normalized = df.copy()
-
-        # Columns to normalize
         cols_to_normalize = [col for col in df.columns if col not in exclude_cols]
-
-        # Calculate statistics for logging
         normalization_stats = {}
 
         for col in cols_to_normalize:
-            if df[col].notna().sum() > 0:  # Only if data exists
+            if df[col].notna().sum() > 0:
                 mean_val = df[col].mean()
                 std_val = df[col].std()
 
-                if std_val > 0:  # Avoid division by zero
+                if std_val > 0:
                     df_normalized[col] = (df[col] - mean_val) / std_val
                     normalization_stats[col] = {'mean': mean_val, 'std': std_val}
 
         self.log(f"  → Normalized {len(normalization_stats)} columns for {country_name}")
 
-        # Save normalization statistics for potential inverse transform
+        # Save normalization statistics
         stats_df = pd.DataFrame(normalization_stats).T
-        stats_df.to_csv(OUTPUT_DIR / f'{country_name.lower().replace(" ", "_")}_normalization_stats.csv')
+        stats_df.to_csv(OUTPUT_DIR / f'{country_name.lower()}_normalization_stats.csv')
 
         return df_normalized
 
-    def analyze_stationarity(self, df, country_name=''):
-        """
-        Visual stationarity analysis using rolling statistics
-
-        For each key indicator:
-        - Plot original series
-        - Plot rolling mean (4-quarter window)
-        - Plot rolling std (4-quarter window)
-        """
-        indicators_to_check = ['gdp_real', 'gdp_constant', 'gdp_growth_yoy',
-                              'unemployment_rate', 'unemployment',
-                              'cpi_annual_growth', 'inflation',
-                              'industrial_production_index']
-
-        available_indicators = [ind for ind in indicators_to_check if ind in df.columns]
-
-        if not available_indicators:
-            self.log(f"  ⚠ No key indicators found for stationarity analysis in {country_name}")
-            return
-
-        # Create subplots
-        n_indicators = len(available_indicators)
-        n_cols = 2
-        n_rows = (n_indicators + 1) // 2
-
-        fig, axes = plt.subplots(n_rows, n_cols, figsize=(16, 4 * n_rows))
-        if n_indicators == 1:
-            axes = np.array([axes])
-        axes = axes.flatten()
-
-        for idx, indicator in enumerate(available_indicators):
-            ax = axes[idx]
-
-            # Original series
-            ax.plot(df.index, df[indicator], label='Original', linewidth=1.5, alpha=0.7)
-
-            # Rolling mean (4-quarter)
-            rolling_mean = df[indicator].rolling(window=4).mean()
-            ax.plot(df.index, rolling_mean, label='Rolling Mean (4Q)', linewidth=2, color='red')
-
-            # Rolling std (4-quarter)
-            rolling_std = df[indicator].rolling(window=4).std()
-            ax.fill_between(df.index,
-                           rolling_mean - rolling_std,
-                           rolling_mean + rolling_std,
-                           alpha=0.2, color='red', label='±1 Std Dev')
-
-            ax.set_title(f'{indicator.replace("_", " ").title()}', fontsize=11, fontweight='bold')
-            ax.set_xlabel('Date')
-            ax.set_ylabel('Value')
-            ax.legend(loc='best', fontsize=8)
-            ax.grid(True, alpha=0.3)
-
-        # Hide unused subplots
-        for idx in range(n_indicators, len(axes)):
-            axes[idx].axis('off')
-
-        plt.suptitle(f'{country_name} - Stationarity Analysis', fontsize=14, fontweight='bold')
-        plt.tight_layout()
-        plt.savefig(VIZ_DIR / f'stationarity_{country_name.lower().replace(" ", "_")}.png',
-                   dpi=300, bbox_inches='tight')
-        plt.close()
-
-        self.log(f"  ✓ Saved stationarity plot for {country_name}")
-
-    def process_country(self, df, country_name, is_brics=False):
+    def process_country(self, df, country_name):
         """
         Complete preprocessing pipeline for a single country
-
-        Steps:
-        1. Resample to quarterly
-        2. Impute missing data
-        3. Create features
-        4. Normalize data
-        5. Analyze stationarity
-        6. Save processed data
         """
         self.log(f"\n{'='*60}")
         self.log(f"Processing: {country_name}")
@@ -610,13 +530,13 @@ class PreprocessingPipeline:
         self.log("[2/6] Imputing missing data...")
         df_imputed = self.impute_missing_data(df_quarterly, country_name=country_name)
 
-        # Step 3: Create features (before normalization)
+        # Step 3: Create features
         self.log("[3/6] Creating engineered features...")
         df_featured = self.create_features(df_imputed, country_name=country_name)
 
-        # Step 4: Save un-normalized version (for interpretability)
+        # Step 4: Save un-normalized version
         self.log("[4/6] Saving un-normalized processed data...")
-        output_file = OUTPUT_DIR / f'{country_name.lower().replace(" ", "_")}_processed_unnormalized.csv'
+        output_file = OUTPUT_DIR / f'{country_name.lower()}_processed_unnormalized.csv'
         df_featured.to_csv(output_file)
         self.log(f"  ✓ Saved to {output_file}")
 
@@ -624,12 +544,8 @@ class PreprocessingPipeline:
         self.log("[5/6] Normalizing data...")
         df_normalized = self.normalize_data(df_featured, country_name=country_name)
 
-        # Step 6: Analyze stationarity (use un-normalized for visualization)
-        self.log("[6/6] Analyzing stationarity...")
-        self.analyze_stationarity(df_featured, country_name=country_name)
-
-        # Save final normalized version
-        output_file_norm = OUTPUT_DIR / f'{country_name.lower().replace(" ", "_")}_processed_normalized.csv'
+        # Step 6: Save normalized version
+        output_file_norm = OUTPUT_DIR / f'{country_name.lower()}_processed_normalized.csv'
         df_normalized.to_csv(output_file_norm)
         self.log(f"  ✓ Saved normalized data to {output_file_norm}")
 
@@ -642,118 +558,44 @@ class PreprocessingPipeline:
 
         return df_normalized
 
-    def create_combined_datasets(self, processed_data):
-        """
-        Create combined datasets for G7 and BRICS
-        """
-        self.log(f"\n{'='*60}")
-        self.log("Creating combined datasets...")
-        self.log(f"{'='*60}")
-
-        # Separate G7 and BRICS
-        g7_countries = ['USA', 'Canada', 'France', 'Germany', 'Italy', 'Japan', 'UK']
-        brics_countries = ['Brazil', 'Russia', 'India', 'China', 'South Africa']
-
-        g7_data = {k: v for k, v in processed_data.items() if k in g7_countries}
-        brics_data = {k: v for k, v in processed_data.items() if k in brics_countries}
-
-        # Combine G7
-        if g7_data:
-            g7_combined = pd.concat([df.assign(country=country) for country, df in g7_data.items()])
-            g7_combined.to_csv(OUTPUT_DIR / 'g7_combined_processed.csv')
-            self.log(f"  ✓ Saved G7 combined dataset: {g7_combined.shape}")
-
-        # Combine BRICS
-        if brics_data:
-            brics_combined = pd.concat([df.assign(country=country) for country, df in brics_data.items()])
-            brics_combined.to_csv(OUTPUT_DIR / 'brics_combined_processed.csv')
-            self.log(f"  ✓ Saved BRICS combined dataset: {brics_combined.shape}")
-
-        # Combine ALL
-        all_combined = pd.concat([df.assign(country=country) for country, df in processed_data.items()])
-        all_combined.to_csv(OUTPUT_DIR / 'all_countries_combined_processed.csv')
-        self.log(f"  ✓ Saved ALL countries combined dataset: {all_combined.shape}")
-
-    def generate_preprocessing_report(self):
-        """
-        Generate summary statistics and visualizations
-        """
-        self.log(f"\n{'='*60}")
-        self.log("Generating preprocessing report...")
-        self.log(f"{'='*60}")
-
-        # Load all processed files
-        processed_files = list(OUTPUT_DIR.glob('*_processed_unnormalized.csv'))
-
-        summary_stats = []
-
-        for file in processed_files:
-            df = pd.read_csv(file, index_col=0, parse_dates=True)
-            country = file.stem.replace('_processed_unnormalized', '').replace('_', ' ').title()
-
-            stats = {
-                'Country': country,
-                'Observations': len(df),
-                'Features': len(df.columns),
-                'Start Date': df.index.min(),
-                'End Date': df.index.max(),
-                'Missing Values': df.isnull().sum().sum(),
-                'Missing %': (df.isnull().sum().sum() / (len(df) * len(df.columns))) * 100
-            }
-            summary_stats.append(stats)
-
-        summary_df = pd.DataFrame(summary_stats)
-        summary_df.to_csv(OUTPUT_DIR / 'preprocessing_summary.csv', index=False)
-        self.log(f"  ✓ Saved preprocessing summary")
-
-        return summary_df
-
 def main():
     """Main execution function"""
     print("="*80)
     print("DATA PREPROCESSING PIPELINE - GDP NOWCASTING PROJECT")
     print("="*80)
+    print(f"\n⚠️  PROCESSING COUNTRIES: {COUNTRIES_TO_PROCESS}")
+    print("   (Change COUNTRIES_TO_PROCESS variable to process different countries)")
+    print("="*80)
 
     # Initialize pipeline
     pipeline = PreprocessingPipeline(verbose=True)
 
-    # Load data
-    print("\n[STEP 1] Loading raw data...")
-    g7_data = pipeline.load_g7_data()
-    brics_data = pipeline.load_brics_data()
+    # Load data for specified countries
+    print(f"\n[STEP 1] Loading data for {COUNTRIES_TO_PROCESS}...")
+    country_data = pipeline.load_country_data(COUNTRIES_TO_PROCESS)
+
+    if not country_data:
+        print("\n❌ No data loaded. Check that:")
+        print("   1. Country is set to 'active': True in G7_COUNTRIES")
+        print("   2. Data file exists at specified path")
+        return
 
     # Process each country
-    print("\n[STEP 2] Processing G7 countries...")
+    print(f"\n[STEP 2] Processing {len(country_data)} countries...")
     processed_data = {}
 
-    for country, df in g7_data.items():
-        processed_df = pipeline.process_country(df, country, is_brics=False)
+    for country, df in country_data.items():
+        processed_df = pipeline.process_country(df, country)
         processed_data[country] = processed_df
 
-    print("\n[STEP 3] Processing BRICS countries...")
-    for country, df in brics_data.items():
-        processed_df = pipeline.process_country(df, country, is_brics=True)
-        processed_data[country] = processed_df
-
-    # Create combined datasets
-    print("\n[STEP 4] Creating combined datasets...")
-    pipeline.create_combined_datasets(processed_data)
-
-    # Generate report
-    print("\n[STEP 5] Generating preprocessing report...")
-    summary_df = pipeline.generate_preprocessing_report()
-
+    # Generate summary
     print("\n" + "="*80)
     print("PREPROCESSING COMPLETE!")
     print(f"Processed datasets saved to: {OUTPUT_DIR}")
-    print(f"Stationarity plots saved to: {VIZ_DIR}")
     print("="*80)
 
-    print("\nPreprocessing Summary:")
-    print(summary_df.to_string(index=False))
-
     # Save log
-    log_file = OUTPUT_DIR / 'preprocessing_log.txt'
+    log_file = OUTPUT_DIR / f'preprocessing_log_{"-".join(COUNTRIES_TO_PROCESS)}.txt'
     with open(log_file, 'w') as f:
         f.write('\n'.join(pipeline.preprocessing_log))
     print(f"\nDetailed log saved to: {log_file}")
