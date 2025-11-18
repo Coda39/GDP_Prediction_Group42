@@ -4,6 +4,16 @@
 
 This directory contains quarterly GDP forecasting models for all G7 countries (USA, Canada, UK, Japan, Germany, France, Italy). Each country has models that forecast GDP growth at 1, 2, 3, and 4 quarter horizons.
 
+For each country, use these specific models:
+
+- USA: XGBoost for all horizons
+- Canada: XGBoost (h1-h3), Random Forest (h4) - AVOID ensemble
+- UK: XGBoost for all horizons
+- Japan: Gradient Boosting (h1), LASSO (h2), XGBoost (h3-h4)
+- Germany: Random Forest (h1, h4), Gradient Boosting (h2-h3)
+- France: XGBoost for all horizons
+- Italy: Ensemble (h1, h3, h4), Random Forest (h2)
+
 **Total Models:** 140 (7 countries × 4 horizons × 5 models per horizon)
 
 ## Key Features
