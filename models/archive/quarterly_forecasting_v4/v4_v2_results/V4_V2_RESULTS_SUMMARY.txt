@@ -1,0 +1,78 @@
+==========================================================================================
+V4 MODELS WITH V2 FEATURE-ENGINEERED DATA - RESULTS SUMMARY
+==========================================================================================
+
+📊 FORECASTING MODELS (Leading Indicators - 6-18 Month Lookahead)
+------------------------------------------------------------------------------------------
+
+Horizon h=1 (Quarter 1 Ahead):
+  Model                 │    R² Score    │   RMSE   │   MAE    │  Samples
+  -------------------------------------------------------------------------------------
+  Ridge                │        0.6207 │   394.99 │   297.81 │    1409
+  RandomForest         │       -7.6146 │  1882.49 │  1613.06 │    1409
+  GradientBoosting     │       -7.9927 │  1923.36 │  1622.72 │    1409
+  Ensemble             │       -3.6225 │  1378.97 │  1161.27 │    1409
+
+Horizon h=2 (Quarter 2 Ahead):
+  Model                 │    R² Score    │   RMSE   │   MAE    │  Samples
+  -------------------------------------------------------------------------------------
+  Ridge                │        0.6586 │   374.59 │   284.78 │    1408
+  RandomForest         │       -7.1167 │  1826.33 │  1567.35 │    1408
+  GradientBoosting     │       -8.0336 │  1926.72 │  1627.04 │    1408
+  Ensemble             │       -3.4713 │  1355.51 │  1143.75 │    1408
+
+Horizon h=3 (Quarter 3 Ahead):
+  Model                 │    R² Score    │   RMSE   │   MAE    │  Samples
+  -------------------------------------------------------------------------------------
+  Ridge                │        0.6904 │   356.53 │   272.52 │    1407
+  RandomForest         │       -6.9859 │  1810.60 │  1548.79 │    1407
+  GradientBoosting     │       -7.8107 │  1901.80 │  1584.72 │    1407
+  Ensemble             │       -3.3503 │  1336.35 │  1119.53 │    1407
+
+Horizon h=4 (Quarter 4 Ahead):
+  Model                 │    R² Score    │   RMSE   │   MAE    │  Samples
+  -------------------------------------------------------------------------------------
+  Ridge                │        0.7096 │   345.10 │   264.86 │    1406
+  RandomForest         │       -6.9981 │  1811.02 │  1546.59 │    1406
+  GradientBoosting     │       -7.4433 │  1860.74 │  1610.45 │    1406
+  Ensemble             │       -3.2461 │  1319.55 │  1125.15 │    1406
+
+
+📊 NOWCASTING MODELS (Coincident Indicators - Current Quarter)
+------------------------------------------------------------------------------------------
+
+Horizon h=1 (Current Quarter):
+  Model                 │    R² Score    │   RMSE   │   MAE    │  Samples
+  -------------------------------------------------------------------------------------
+  Ridge                │        0.9392 │   158.18 │   120.23 │    1409
+  RandomForest         │       -2.2859 │  1162.63 │   970.59 │    1409
+  GradientBoosting     │       -2.3024 │  1165.56 │   978.78 │    1409
+  Ensemble             │       -0.4262 │   765.96 │   637.51 │    1409
+
+
+📈 KEY INSIGHTS
+------------------------------------------------------------------------------------------
+✓ Best Forecasting Model: Ridge (h=4, R²=0.7096)
+✓ Best Nowcasting Model: Ridge (R²=0.9392)
+✓ Nowcasting significantly outperforms forecasting (R²=0.9392 vs 0.7096)
+  → This is expected: current-quarter data is more predictive than future data
+✓ Ridge regression dominates tree-based models
+  → V2 features may be linear relationships
+  → Tree models show negative R² (overfitting on small feature set)
+✓ Forecast accuracy improves with longer horizons
+  → h=1: R²=0.6207
+  → h=4: R²=0.7096
+  → Suggests models capture longer-term trends well
+
+
+📁 OUTPUT FILES
+------------------------------------------------------------------------------------------
+Results:        /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/models/quarterly_forecasting_v4/v4_v2_results/results/v4_v2_model_results.json
+Predictions:    /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/models/quarterly_forecasting_v4/v4_v2_results/results/v4_v2_predictions.pkl
+Visualizations: /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/models/quarterly_forecasting_v4/v4_v2_results/forecast_visualizations/
+  - v4_v2_r2_heatmap.png
+  - v4_v2_model_comparison.png
+  - v4_v2_rmse_by_horizon.png
+  - v4_v2_results_table.png
+
+==========================================================================================

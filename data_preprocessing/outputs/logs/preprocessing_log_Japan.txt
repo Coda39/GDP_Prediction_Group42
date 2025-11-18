@@ -1,0 +1,61 @@
+✓ Loaded Japan: (183, 31) from extended/japan_extended_with_bloomberg.csv
+
+============================================================
+Processing: Japan
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Japan from daily to quarterly: (183, 31) → (184, 30)
+[2/6] Imputing missing data...
+    bond_corporate: 29 missing → 0 after default
+    bond_gov_10y: 32 missing → 0 after default
+    bond_gov_2y: 43 missing → 0 after default
+    bond_gov_5y: 34 missing → 0 after default
+    capital_formation: 93 missing → 0 after interpolation
+    consumer_confidence_japan: 16 missing → 0 after default
+    cpi_all_items: 18 missing → 0 after interpolation
+    cpi_annual_growth: 160 missing → 0 after interpolation
+    credit_spread: 32 missing → 0 after default
+    credit_spread_change: 33 missing → 0 after default
+    employment_level: 85 missing → 0 after interpolation
+    exchange_rate_usd: 85 missing → 0 after interpolation
+    exports_volume: 65 missing → 0 after interpolation
+    gdp_nominal: 66 missing → 0 after interpolation
+    gdp_real: 59 missing → 0 after interpolation
+    government_spending: 87 missing → 0 after interpolation
+    household_consumption: 93 missing → 0 after interpolation
+    imports_volume: 65 missing → 0 after interpolation
+    industrial_production_index: 7 missing → 0 after interpolation
+    industrial_production_japan: 7 missing → 0 after default
+    interest_rate_long_term: 85 missing → 0 after forward-fill
+    interest_rate_short_term: 85 missing → 0 after forward-fill
+    money_supply_broad: 92 missing → 0 after interpolation
+    population_total: 139 missing → 0 after interpolation
+    population_working_age: 85 missing → 0 after interpolation
+    stock_market_index: 1 missing → 0 after forward-fill
+    trade_balance: 132 missing → 0 after interpolation
+    unemployment_rate: 2 missing → 0 after interpolation
+    yield_curve_curvature: 43 missing → 0 after default
+    yield_curve_slope: 43 missing → 0 after default
+  → Japan imputation: 1816 missing → 0 remaining
+[3/6] Creating engineered features...
+  → Created lagged GDP growth features for Japan
+  → Created 41 engineered features for Japan
+  → Creating V6 financial features for Japan...
+    ✓ Unemployment × Inflation
+    ✓ Stock returns, volatility, risk-adjusted
+    ✓ Unemployment momentum & deviation
+    ✓ Inflation acceleration
+    ✓ Inflation Z-score
+    ✓ Financial conditions index (3 components)
+  → Created 9 V6 features for Japan (NO GDP CIRCULARITY)
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/japan_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 80 columns for Japan
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/japan_processed_normalized.csv
+
+Summary for Japan:
+  Original shape: (183, 31)
+  Final shape: (184, 81)
+  Date range: 1980-03-31 00:00:00 to 2025-12-31 00:00:00
+  Remaining missing values: 132

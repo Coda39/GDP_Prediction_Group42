@@ -1,0 +1,7 @@
+Country,Horizon,Model,Train_RMSE,Val_RMSE,Test_RMSE,Train_R2,Val_R2,Test_R2,Test_Coverage_80,Test_Coverage_95
+JAPAN,h4,Ridge,2.231,4.346,5.199,0.186,-0.134,-33.821,16.7%,33.3%
+JAPAN,h4,LASSO,2.405,5.164,4.155,0.054,-0.601,-21.247,0.0%,100.0%
+JAPAN,h4,Random Forest,1.795,4.079,1.041,0.473,0.001,-0.397,91.7%,100.0%
+JAPAN,h4,XGBoost,1.839,4.038,0.916,0.447,0.021,-0.081,100.0%,100.0%
+JAPAN,h4,Gradient Boosting,1.996,4.027,1.007,0.348,0.026,-0.308,91.7%,100.0%
+JAPAN,h4,Ensemble,N/A,N/A,1.524,N/A,N/A,-1.992,91.7%,100.0%

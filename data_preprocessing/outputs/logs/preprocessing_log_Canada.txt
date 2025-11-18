@@ -50,10 +50,10 @@ Processing: Canada
     ✓ Real activity index (2 components)
   → Created 10 V6 features for Canada (NO GDP CIRCULARITY)
 [4/6] Saving un-normalized processed data...
-  ✓ Saved to C:\Users\camde\GDP_Prediction_Group42\data_preprocessing\outputs\processed_data\canada_processed_unnormalized.csv
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/canada_processed_unnormalized.csv
 [5/6] Normalizing data...
   → Normalized 81 columns for Canada
-  ✓ Saved normalized data to C:\Users\camde\GDP_Prediction_Group42\data_preprocessing\outputs\processed_data\canada_processed_normalized.csv
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/canada_processed_normalized.csv
 
 Summary for Canada:
   Original shape: (183, 31)

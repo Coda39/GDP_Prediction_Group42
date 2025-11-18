@@ -1,0 +1,7 @@
+Country,Horizon,Model,Train_RMSE,Val_RMSE,Test_RMSE,Train_R2,Val_R2,Test_R2,Test_Coverage_80,Test_Coverage_95
+ITALY,h3,Ridge,1.339,8.049,2.477,0.511,0.227,-14.211,23.1%,69.2%
+ITALY,h3,LASSO,1.726,8.746,1.975,0.187,0.087,-8.670,38.5%,100.0%
+ITALY,h3,Random Forest,0.885,9.863,1.498,0.786,-0.161,-4.563,46.2%,69.2%
+ITALY,h3,XGBoost,0.733,9.474,1.941,0.853,-0.071,-8.336,7.7%,53.8%
+ITALY,h3,Gradient Boosting,1.001,9.600,1.444,0.727,-0.100,-4.170,46.2%,76.9%
+ITALY,h3,Ensemble,N/A,N/A,1.196,N/A,N/A,-2.547,100.0%,100.0%

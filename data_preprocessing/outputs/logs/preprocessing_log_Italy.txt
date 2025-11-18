@@ -1,0 +1,59 @@
+✓ Loaded Italy: (139, 30) from extended/italy_extended_with_bloomberg.csv
+
+============================================================
+Processing: Italy
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled Italy from daily to quarterly: (139, 30) → (140, 29)
+[2/6] Imputing missing data...
+    bond_corporate: 30 missing → 0 after default
+    bond_gov_10y: 10 missing → 0 after default
+    bond_gov_2y: 10 missing → 0 after default
+    bond_gov_5y: 10 missing → 0 after default
+    capital_formation: 45 missing → 0 after interpolation
+    consumer_confidence: 104 missing → 0 after default
+    cpi_all_items: 3 missing → 0 after interpolation
+    cpi_annual_growth: 115 missing → 0 after interpolation
+    credit_spread: 30 missing → 0 after default
+    credit_spread_change: 31 missing → 0 after default
+    employment_level: 39 missing → 0 after interpolation
+    exchange_rate_usd: 37 missing → 0 after interpolation
+    exports_volume: 25 missing → 0 after interpolation
+    gdp_nominal: 18 missing → 0 after interpolation
+    gdp_real: 18 missing → 0 after interpolation
+    government_spending: 39 missing → 0 after interpolation
+    household_consumption: 45 missing → 0 after interpolation
+    imports_volume: 25 missing → 0 after interpolation
+    industrial_production_index: 7 missing → 0 after interpolation
+    interest_rate_long_term: 1 missing → 0 after forward-fill
+    interest_rate_short_term: 33 missing → 0 after forward-fill
+    population_total: 115 missing → 0 after interpolation
+    population_working_age: 39 missing → 0 after interpolation
+    stock_market_index: 37 missing → 0 after forward-fill
+    trade_balance: 83 missing → 0 after interpolation
+    unemployment_rate: 3 missing → 0 after interpolation
+    yield_curve_curvature: 10 missing → 0 after default
+    yield_curve_slope: 10 missing → 0 after default
+  → Italy imputation: 1112 missing → 140 remaining
+[3/6] Creating engineered features...
+  → Created lagged GDP growth features for Italy
+  → Created 41 engineered features for Italy
+  → Creating V6 financial features for Italy...
+    ✓ Unemployment × Inflation
+    ✓ Stock returns, volatility, risk-adjusted
+    ✓ Unemployment momentum & deviation
+    ✓ Inflation acceleration
+    ✓ Inflation Z-score
+    ✓ Financial conditions index (3 components)
+  → Created 9 V6 features for Italy (NO GDP CIRCULARITY)
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/italy_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 77 columns for Italy
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/italy_processed_normalized.csv
+
+Summary for Italy:
+  Original shape: (139, 30)
+  Final shape: (140, 80)
+  Date range: 1991-03-31 00:00:00 to 2025-12-31 00:00:00
+  Remaining missing values: 408

@@ -1,0 +1,7 @@
+Country,Horizon,Model,Train_RMSE,Val_RMSE,Test_RMSE,Train_R2,Val_R2,Test_R2,Test_Coverage_80,Test_Coverage_95
+USA,h2,Ridge,1.259,5.099,3.829,0.573,-0.274,-44.158,0.0%,50.0%
+USA,h2,LASSO,1.828,4.456,1.012,0.100,0.027,-2.156,100.0%,100.0%
+USA,h2,Random Forest,1.124,4.443,0.748,0.659,0.033,-0.724,90.0%,100.0%
+USA,h2,XGBoost,1.439,4.482,0.655,0.442,0.016,-0.320,90.0%,100.0%
+USA,h2,Gradient Boosting,1.043,4.403,0.751,0.707,0.050,-0.736,90.0%,100.0%
+USA,h2,Ensemble,N/A,N/A,0.676,N/A,N/A,-0.408,90.0%,100.0%

@@ -1,0 +1,35 @@
+✓ Loaded USA: (180, 31) from extended/usa_extended_with_financial_1980-2024.csv
+
+============================================================
+Processing: USA
+============================================================
+[1/6] Resampling to quarterly frequency...
+  → Resampled USA from daily to quarterly: (180, 31) → (180, 30)
+[2/6] Imputing missing data...
+    ted_spread: 35 missing → 0 after default
+    trade_balance: 48 missing → 0 after interpolation
+  → USA imputation: 83 missing → 0 remaining
+[3/6] Creating engineered features...
+  → Created lagged GDP growth features for USA
+  → Created 34 engineered features for USA
+  → Creating V6 financial features for USA...
+    ✓ Yield curve slope & inversion
+    ✓ Yield curve curvature
+    ✓ Credit spread & change
+    ✓ Financial stress indicator
+    ✓ Stock returns, volatility, risk-adjusted
+    ✓ Unemployment momentum & deviation
+    ✓ Financial conditions index (3 components)
+    ✓ Real activity index (3 components)
+  → Created 13 V6 features for USA (NO GDP CIRCULARITY)
+[4/6] Saving un-normalized processed data...
+  ✓ Saved to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/usa_processed_unnormalized.csv
+[5/6] Normalizing data...
+  → Normalized 77 columns for USA
+  ✓ Saved normalized data to /Users/Mateo/School/Fall_2025/CS_4485/GDP_Prediction_Group42/data_preprocessing/outputs/processed_data/usa_processed_normalized.csv
+
+Summary for USA:
+  Original shape: (180, 31)
+  Final shape: (180, 78)
+  Date range: 1980-03-31 00:00:00 to 2024-12-31 00:00:00
+  Remaining missing values: 109
