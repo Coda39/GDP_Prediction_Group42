@@ -55,7 +55,7 @@ from pathlib import Path
 import warnings
 import joblib
 from datetime import datetime
-
+import json
 # ML libraries
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
@@ -628,6 +628,67 @@ class GDPNowcastingPipeline:
 
             self.log(f"  ✓ Saved time series plot: {country}_nowcast_timeseries.png")
 
+    def export_predictions_for_recharts(self, country):
+        """Export test predictions in JSON format optimized for Recharts - ALL models"""
+        if country not in self.results:
+            self.log(f"⚠ No results available for {country}")
+            return
+
+        results = self.results[country]
+
+        # Get test dates (same for all models)
+        file_path = DATA_DIR / f'{country.lower()}_processed_unnormalized.csv'
+        df = pd.read_csv(file_path, index_col=0, parse_dates=True)
+        val_end = '2021-12-31'
+
+        # Export predictions for each model
+        all_models_output = {}
+
+        for model_name, metrics in results.items():
+            # Check if test data exists
+            if np.isnan(metrics['test']['RMSE']):
+                self.log(f"  ⚠ No test data for {model_name}")
+                continue
+
+            # Extract predictions and actuals
+            test_actuals = metrics['test']['actuals']
+            test_predictions = metrics['test']['predictions']
+
+            test_dates = df.loc[val_end:].iloc[1:].index[:len(test_actuals)]
+
+            # Format data for Recharts
+            chart_data = []
+            for date, actual, predicted in zip(test_dates, test_actuals, test_predictions):
+                quarter_str = f"{date.year} Q{(date.month-1)//3 + 1}"
+                chart_data.append({
+                    'date': date.strftime('%Y-%m-%d'),
+                    'quarter': quarter_str,
+                    'actual': round(float(actual), 2),
+                    'predicted': round(float(predicted), 2)
+                })
+
+            # Store model data
+            all_models_output[model_name] = {
+                'test_r2': round(float(metrics['test']['R2']), 3),
+                'test_rmse': round(float(metrics['test']['RMSE']), 3),
+                'test_mae': round(float(metrics['test']['MAE']), 3),
+                'data': chart_data
+            }
+
+        # Save combined JSON file with all models
+        output_file = OUTPUT_DIR / f'{country.lower()}_nowcasting.json'
+        with open(output_file, 'w') as f:
+            json.dump(all_models_output, f, indent=2)
+
+        self.log(f"  ✓ Saved Recharts predictions: {output_file}")
+        self.log(f"    Models exported: {len(all_models_output)}")
+
+        # Find and display best model
+        best_model_name = max(all_models_output.keys(),
+                             key=lambda k: all_models_output[k]['test_r2'])
+        self.log(f"    Best Model: {best_model_name} (R² = {all_models_output[best_model_name]['test_r2']})")
+
+
 def main():
     """Main execution"""
     print("="*80)
@@ -651,6 +712,11 @@ def main():
             pipeline.plot_predictions(country)
             pipeline.plot_feature_importance(country)
             pipeline.plot_time_series_predictions(country)
+            # Export predictions for Recharts
+            print(f"\
+Exporting predictions for Recharts visualization...")
+            pipeline.export_predictions_for_recharts(country)
+
 
     # Combine results across countries
     print(f"\n{'='*80}")

@@ -1,0 +1,723 @@
+{
+  "Linear Regression": {
+    "test_r2": 0.709,
+    "test_rmse": 0.625,
+    "test_mae": 0.548,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 3.69,
+        "predicted": 2.86
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.46,
+        "predicted": 1.83
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 1.67,
+        "predicted": 1.86
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 0.77,
+        "predicted": 0.56
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": -0.38,
+        "predicted": -0.03
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": -0.6,
+        "predicted": -0.53
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": -0.89,
+        "predicted": -0.3
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.82,
+        "predicted": -0.29
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.46,
+        "predicted": 0.02
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": -0.64,
+        "predicted": -0.36
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": -0.62,
+        "predicted": -0.03
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": -0.16,
+        "predicted": 0.5
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.25,
+        "predicted": -1.07
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.43,
+        "predicted": -0.36
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": 0.41,
+        "predicted": -0.35
+      },
+      {
+        "date": "2025-12-31",
+        "quarter": "2025 Q4",
+        "actual": 0.23,
+        "predicted": -0.49
+      }
+    ]
+  },
+  "Ridge": {
+    "test_r2": -1.114,
+    "test_rmse": 1.683,
+    "test_mae": 1.467,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 3.69,
+        "predicted": 3.8
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.46,
+        "predicted": 3.98
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 1.67,
+        "predicted": 2.74
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 0.77,
+        "predicted": 1.83
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": -0.38,
+        "predicted": 1.58
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": -0.6,
+        "predicted": 2.01
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": -0.89,
+        "predicted": 1.84
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.82,
+        "predicted": 0.26
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.46,
+        "predicted": 1.87
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": -0.64,
+        "predicted": 1.77
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": -0.62,
+        "predicted": 0.62
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": -0.16,
+        "predicted": 1.38
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.25,
+        "predicted": 1.23
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.43,
+        "predicted": 0.75
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": 0.41,
+        "predicted": 1.08
+      },
+      {
+        "date": "2025-12-31",
+        "quarter": "2025 Q4",
+        "actual": 0.23,
+        "predicted": 1.08
+      }
+    ]
+  },
+  "LASSO": {
+    "test_r2": 0.666,
+    "test_rmse": 0.669,
+    "test_mae": 0.62,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 3.69,
+        "predicted": 2.84
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.46,
+        "predicted": 1.99
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 1.67,
+        "predicted": 1.77
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 0.77,
+        "predicted": 0.7
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": -0.38,
+        "predicted": 0.26
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": -0.6,
+        "predicted": -0.07
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": -0.89,
+        "predicted": 0.1
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.82,
+        "predicted": -0.21
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.46,
+        "predicted": 0.35
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": -0.64,
+        "predicted": -0.02
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": -0.62,
+        "predicted": 0.01
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": -0.16,
+        "predicted": 0.6
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.25,
+        "predicted": -0.77
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.43,
+        "predicted": -0.22
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": 0.41,
+        "predicted": -0.16
+      },
+      {
+        "date": "2025-12-31",
+        "quarter": "2025 Q4",
+        "actual": 0.23,
+        "predicted": -0.27
+      }
+    ]
+  },
+  "Random Forest": {
+    "test_r2": -2.316,
+    "test_rmse": 2.108,
+    "test_mae": 2.002,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 3.69,
+        "predicted": 2.3
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.46,
+        "predicted": 2.19
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 1.67,
+        "predicted": 2.38
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 0.77,
+        "predicted": 2.03
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": -0.38,
+        "predicted": 1.67
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": -0.6,
+        "predicted": 2.06
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": -0.89,
+        "predicted": 1.93
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.82,
+        "predicted": 1.84
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.46,
+        "predicted": 1.89
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": -0.64,
+        "predicted": 1.9
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": -0.62,
+        "predicted": 2.05
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": -0.16,
+        "predicted": 2.32
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.25,
+        "predicted": 2.29
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.43,
+        "predicted": 2.18
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": 0.41,
+        "predicted": 2.22
+      },
+      {
+        "date": "2025-12-31",
+        "quarter": "2025 Q4",
+        "actual": 0.23,
+        "predicted": 2.33
+      }
+    ]
+  },
+  "XGBoost": {
+    "test_r2": -1.274,
+    "test_rmse": 1.746,
+    "test_mae": 1.592,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 3.69,
+        "predicted": 1.65
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.46,
+        "predicted": 1.68
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 1.67,
+        "predicted": 1.63
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 0.77,
+        "predicted": 1.56
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": -0.38,
+        "predicted": 1.49
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": -0.6,
+        "predicted": 1.55
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": -0.89,
+        "predicted": 1.55
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.82,
+        "predicted": 1.54
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.46,
+        "predicted": 1.55
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": -0.64,
+        "predicted": 1.55
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": -0.62,
+        "predicted": 1.64
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": -0.16,
+        "predicted": 1.63
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.25,
+        "predicted": 1.66
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.43,
+        "predicted": 1.66
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": 0.41,
+        "predicted": 1.66
+      },
+      {
+        "date": "2025-12-31",
+        "quarter": "2025 Q4",
+        "actual": 0.23,
+        "predicted": 1.66
+      }
+    ]
+  },
+  "Gradient Boosting": {
+    "test_r2": -1.608,
+    "test_rmse": 1.869,
+    "test_mae": 1.692,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 3.69,
+        "predicted": 1.15
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.46,
+        "predicted": 1.64
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 1.67,
+        "predicted": 1.65
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 0.77,
+        "predicted": 1.66
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": -0.38,
+        "predicted": 1.59
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": -0.6,
+        "predicted": 1.75
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": -0.89,
+        "predicted": 1.7
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.82,
+        "predicted": 1.7
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.46,
+        "predicted": 1.7
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": -0.64,
+        "predicted": 1.7
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": -0.62,
+        "predicted": 1.71
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": -0.16,
+        "predicted": 1.71
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.25,
+        "predicted": 1.64
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.43,
+        "predicted": 1.64
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": 0.41,
+        "predicted": 1.64
+      },
+      {
+        "date": "2025-12-31",
+        "quarter": "2025 Q4",
+        "actual": 0.23,
+        "predicted": 1.7
+      }
+    ]
+  },
+  "Stacking Ensemble": {
+    "test_r2": -4.066,
+    "test_rmse": 2.605,
+    "test_mae": 2.458,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 3.69,
+        "predicted": 3.92
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.46,
+        "predicted": 3.06
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 1.67,
+        "predicted": 3.13
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 0.77,
+        "predicted": 2.81
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": -0.38,
+        "predicted": 2.75
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": -0.6,
+        "predicted": 2.85
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": -0.89,
+        "predicted": 2.73
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.82,
+        "predicted": 2.24
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.46,
+        "predicted": 2.68
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": -0.64,
+        "predicted": 2.69
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": -0.62,
+        "predicted": 2.13
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": -0.16,
+        "predicted": 2.65
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.25,
+        "predicted": 2.65
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.43,
+        "predicted": 2.35
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": 0.41,
+        "predicted": 2.49
+      },
+      {
+        "date": "2025-12-31",
+        "quarter": "2025 Q4",
+        "actual": 0.23,
+        "predicted": 2.53
+      }
+    ]
+  }
+}

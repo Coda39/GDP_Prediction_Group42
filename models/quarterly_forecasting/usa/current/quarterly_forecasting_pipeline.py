@@ -32,6 +32,7 @@ from pathlib import Path
 import warnings
 import joblib
 from datetime import datetime
+import json
 
 # ML libraries
 from sklearn.linear_model import Ridge, Lasso
@@ -774,6 +775,96 @@ class QuarterlyForecastingPipeline:
 
         self.log(f"  ✓ Saved feature importance plot: {self.country}_h{horizon}_feature_importance.png")
 
+    def export_predictions_for_recharts(self, horizon):
+        """Export test predictions in JSON format optimized for Recharts - ALL models + ensemble"""
+        if horizon not in self.results:
+            self.log(f"⚠ No results available for horizon h={horizon}")
+            return
+
+        results = self.results[horizon]
+
+        # Export predictions for each model
+        all_models_output = {}
+
+        for model_name, metrics in results.items():
+            # Check if test data exists
+            if metrics["test"] is None:
+                self.log(f"  ⚠ No test data for {model_name}")
+                continue
+
+            # Extract predictions and actuals
+            test_actuals = metrics["test"]["actuals"]
+            test_predictions = metrics["test"]["predictions"]
+            lower_80 = metrics["test"]["lower_80"]
+            upper_80 = metrics["test"]["upper_80"]
+            lower_95 = metrics["test"]["lower_95"]
+            upper_95 = metrics["test"]["upper_95"]
+
+            # Get test dates from ensemble_results (same for all models)
+            test_dates = self.ensemble_results[horizon]["dates"] if horizon in self.ensemble_results else []
+
+            # Format data for Recharts
+            chart_data = []
+            for i, (date, actual, predicted) in enumerate(zip(test_dates, test_actuals, test_predictions)):
+                quarter_str = f"{date.year} Q{(date.month-1)//3 + 1}"
+                chart_data.append({
+                    'date': date.strftime('%Y-%m-%d'),
+                    'quarter': quarter_str,
+                    'actual': round(float(actual), 2),
+                    'predicted': round(float(predicted), 2),
+                    'lower_80': round(float(lower_80[i]), 2),
+                    'upper_80': round(float(upper_80[i]), 2),
+                    'lower_95': round(float(lower_95[i]), 2),
+                    'upper_95': round(float(upper_95[i]), 2)
+                })
+
+            # Store model data
+            all_models_output[model_name] = {
+                'test_r2': round(float(metrics['test']['R2']), 3),
+                'test_rmse': round(float(metrics['test']['RMSE']), 3),
+                'test_mae': round(float(metrics['test']['MAE']), 3),
+                'coverage_80': round(float(metrics['test']['coverage_80']), 1),
+                'coverage_95': round(float(metrics['test']['coverage_95']), 1),
+                'data': chart_data
+            }
+
+        # Add ensemble predictions
+        if horizon in self.ensemble_results:
+            ens = self.ensemble_results[horizon]
+            test_dates = ens["dates"]
+
+            ensemble_chart_data = []
+            for i, (date, actual, predicted) in enumerate(zip(test_dates, ens["actuals"], ens["predictions"])):
+                quarter_str = f"{date.year} Q{(date.month-1)//3 + 1}"
+                ensemble_chart_data.append({
+                    'date': date.strftime('%Y-%m-%d'),
+                    'quarter': quarter_str,
+                    'actual': round(float(actual), 2),
+                    'predicted': round(float(predicted), 2),
+                    'lower_80': round(float(ens["lower_80"][i]), 2),
+                    'upper_80': round(float(ens["upper_80"][i]), 2),
+                    'lower_95': round(float(ens["lower_95"][i]), 2),
+                    'upper_95': round(float(ens["upper_95"][i]), 2)
+                })
+
+            all_models_output['Ensemble'] = {
+                'test_r2': round(float(ens['R2']), 3),
+                'test_rmse': round(float(ens['RMSE']), 3),
+                'test_mae': round(float(ens['MAE']), 3),
+                'coverage_80': round(float(ens['coverage_80']), 1),
+                'coverage_95': round(float(ens['coverage_95']), 1),
+                'weights': {k: round(float(v), 3) for k, v in ens['weights'].items()},
+                'data': ensemble_chart_data
+            }
+
+        # Save combined JSON file with all models
+        output_file = OUTPUT_DIR / f'{self.country}_forecasting_q{horizon}.json'
+        with open(output_file, 'w') as f:
+            json.dump(all_models_output, f, indent=2)
+
+        self.log(f"  ✓ Saved Recharts predictions: {output_file}")
+        self.log(f"    Models exported: {len(all_models_output)}")
+
 
 def main():
     """Main execution"""
@@ -798,6 +889,10 @@ def main():
             print(f"\nGenerating visualizations for h={horizon}...")
             pipeline.plot_predictions(horizon)
             pipeline.plot_feature_importance(horizon)
+
+            # Export predictions for Recharts
+            print(f"\nExporting predictions for Recharts visualization...")
+            pipeline.export_predictions_for_recharts(horizon)
 
     print("\n" + "=" * 80)
     print("QUARTERLY FORECASTING PIPELINE COMPLETE!")

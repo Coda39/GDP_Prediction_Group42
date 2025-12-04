@@ -1,0 +1,963 @@
+{
+  "Ridge": {
+    "test_r2": -62.363,
+    "test_rmse": 6.487,
+    "test_mae": 4.862,
+    "coverage_80": 20.0,
+    "coverage_95": 40.0,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 1.26,
+        "predicted": -1.37,
+        "lower_80": -3.07,
+        "upper_80": -0.04,
+        "lower_95": -4.13,
+        "upper_95": 0.68
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.29,
+        "predicted": -4.34,
+        "lower_80": -5.86,
+        "upper_80": -2.81,
+        "lower_95": -8.42,
+        "upper_95": -2.01
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 0.37,
+        "predicted": 1.16,
+        "lower_80": -0.34,
+        "upper_80": 2.58,
+        "lower_95": -3.75,
+        "upper_95": 3.28
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 2.21,
+        "predicted": 0.6,
+        "lower_80": -0.78,
+        "upper_80": 2.13,
+        "lower_95": -3.49,
+        "upper_95": 2.93
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": 1.65,
+        "predicted": 1.22,
+        "lower_80": 0.11,
+        "upper_80": 2.75,
+        "lower_95": -2.86,
+        "upper_95": 3.75
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": 1.04,
+        "predicted": 12.19,
+        "lower_80": 11.02,
+        "upper_80": 13.58,
+        "lower_95": 8.11,
+        "upper_95": 14.52
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": 0.67,
+        "predicted": 12.12,
+        "lower_80": 10.62,
+        "upper_80": 13.65,
+        "lower_95": 8.04,
+        "upper_95": 14.45
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.88,
+        "predicted": 12.69,
+        "lower_80": 11.19,
+        "upper_80": 14.11,
+        "lower_95": 7.78,
+        "upper_95": 15.02
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.53,
+        "predicted": 9.46,
+        "lower_80": 7.69,
+        "upper_80": 11.2,
+        "lower_95": 5.38,
+        "upper_95": 11.58
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": 0.73,
+        "predicted": 2.83,
+        "lower_80": 1.12,
+        "upper_80": 4.36,
+        "lower_95": -1.26,
+        "upper_95": 5.16
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": 1.4,
+        "predicted": 1.73,
+        "lower_80": 0.02,
+        "upper_80": 3.14,
+        "lower_95": -2.38,
+        "upper_95": 4.06
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": 1.7,
+        "predicted": -0.7,
+        "lower_80": -1.85,
+        "upper_80": 0.83,
+        "lower_95": -3.46,
+        "upper_95": 1.63
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.73,
+        "predicted": 4.31,
+        "lower_80": 2.81,
+        "upper_80": 6.05,
+        "lower_95": 1.55,
+        "upper_95": 6.43
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.52,
+        "predicted": 3.83,
+        "lower_80": 2.46,
+        "upper_80": 5.59,
+        "lower_95": 1.03,
+        "upper_95": 6.16
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": -0.04,
+        "predicted": 3.91,
+        "lower_80": 2.39,
+        "upper_80": 5.46,
+        "lower_95": -0.18,
+        "upper_95": 6.24
+      }
+    ]
+  },
+  "LASSO": {
+    "test_r2": -4.23,
+    "test_rmse": 1.864,
+    "test_mae": 1.662,
+    "coverage_80": 46.7,
+    "coverage_95": 93.3,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 1.26,
+        "predicted": -0.73,
+        "lower_80": -1.95,
+        "upper_80": 0.85,
+        "lower_95": -6.36,
+        "upper_95": 1.72
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.29,
+        "predicted": -0.7,
+        "lower_80": -1.91,
+        "upper_80": 0.98,
+        "lower_95": -9.08,
+        "upper_95": 2.3
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 0.37,
+        "predicted": 0.85,
+        "lower_80": -0.6,
+        "upper_80": 2.48,
+        "lower_95": -7.85,
+        "upper_95": 3.3
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 2.21,
+        "predicted": -0.17,
+        "lower_80": -1.61,
+        "upper_80": 1.52,
+        "lower_95": -8.55,
+        "upper_95": 2.54
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": 1.65,
+        "predicted": -0.64,
+        "lower_80": -1.85,
+        "upper_80": 1.3,
+        "lower_95": -9.03,
+        "upper_95": 2.36
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": 1.04,
+        "predicted": -1.0,
+        "lower_80": -2.22,
+        "upper_80": 0.67,
+        "lower_95": -9.39,
+        "upper_95": 1.46
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": 0.67,
+        "predicted": -1.35,
+        "lower_80": -2.57,
+        "upper_80": 0.58,
+        "lower_95": -9.74,
+        "upper_95": 1.43
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.88,
+        "predicted": -0.92,
+        "lower_80": -2.16,
+        "upper_80": 0.75,
+        "lower_95": -9.62,
+        "upper_95": 1.5
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.53,
+        "predicted": -0.88,
+        "lower_80": -2.33,
+        "upper_80": 0.81,
+        "lower_95": -9.27,
+        "upper_95": 1.57
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": 0.73,
+        "predicted": -1.14,
+        "lower_80": -2.36,
+        "upper_80": 0.8,
+        "lower_95": -9.52,
+        "upper_95": 1.64
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": 1.4,
+        "predicted": -1.06,
+        "lower_80": -2.5,
+        "upper_80": 0.57,
+        "lower_95": -9.45,
+        "upper_95": 1.72
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": 1.7,
+        "predicted": -1.42,
+        "lower_80": -2.66,
+        "upper_80": 0.27,
+        "lower_95": -4.8,
+        "upper_95": 1.36
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.73,
+        "predicted": -0.93,
+        "lower_80": -2.14,
+        "upper_80": 1.01,
+        "lower_95": -6.56,
+        "upper_95": 1.78
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.52,
+        "predicted": -0.85,
+        "lower_80": -2.09,
+        "upper_80": 1.09,
+        "lower_95": -6.55,
+        "upper_95": 1.93
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": -0.04,
+        "predicted": -0.9,
+        "lower_80": -2.11,
+        "upper_80": 0.79,
+        "lower_95": -9.29,
+        "upper_95": 2.1
+      }
+    ]
+  },
+  "Random Forest": {
+    "test_r2": -0.236,
+    "test_rmse": 0.906,
+    "test_mae": 0.755,
+    "coverage_80": 73.3,
+    "coverage_95": 100.0,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 1.26,
+        "predicted": 1.36,
+        "lower_80": 0.51,
+        "upper_80": 2.59,
+        "lower_95": -3.9,
+        "upper_95": 4.07
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.29,
+        "predicted": 1.42,
+        "lower_80": 0.46,
+        "upper_80": 2.66,
+        "lower_95": -6.2,
+        "upper_95": 4.36
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 0.37,
+        "predicted": 1.43,
+        "lower_80": 0.41,
+        "upper_80": 2.63,
+        "lower_95": -6.34,
+        "upper_95": 3.53
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 2.21,
+        "predicted": 1.02,
+        "lower_80": 0.01,
+        "upper_80": 2.26,
+        "lower_95": -6.6,
+        "upper_95": 3.74
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": 1.65,
+        "predicted": 1.12,
+        "lower_80": 0.3,
+        "upper_80": 2.39,
+        "lower_95": -6.5,
+        "upper_95": 4.06
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": 1.04,
+        "predicted": 0.24,
+        "lower_80": -0.56,
+        "upper_80": 1.39,
+        "lower_95": -7.38,
+        "upper_95": 2.11
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": 0.67,
+        "predicted": 0.11,
+        "lower_80": -0.85,
+        "upper_80": 1.34,
+        "lower_95": -7.51,
+        "upper_95": 2.22
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.88,
+        "predicted": 0.08,
+        "lower_80": -0.77,
+        "upper_80": 1.29,
+        "lower_95": -7.7,
+        "upper_95": 2.17
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.53,
+        "predicted": -0.1,
+        "lower_80": -1.11,
+        "upper_80": 1.12,
+        "lower_95": -7.72,
+        "upper_95": 2.0
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": 0.73,
+        "predicted": -0.05,
+        "lower_80": -0.89,
+        "upper_80": 1.19,
+        "lower_95": -7.67,
+        "upper_95": 2.05
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": 1.4,
+        "predicted": -0.14,
+        "lower_80": -1.16,
+        "upper_80": 1.09,
+        "lower_95": -7.77,
+        "upper_95": 2.57
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": 1.7,
+        "predicted": -0.18,
+        "lower_80": -1.13,
+        "upper_80": 1.06,
+        "lower_95": -3.13,
+        "upper_95": 2.54
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.73,
+        "predicted": -0.01,
+        "lower_80": -0.85,
+        "upper_80": 1.23,
+        "lower_95": -5.26,
+        "upper_95": 2.09
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.52,
+        "predicted": -0.07,
+        "lower_80": -1.02,
+        "upper_80": 1.17,
+        "lower_95": -5.38,
+        "upper_95": 2.03
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": -0.04,
+        "predicted": -0.0,
+        "lower_80": -0.85,
+        "upper_80": 1.27,
+        "lower_95": -7.62,
+        "upper_95": 2.09
+      }
+    ]
+  },
+  "XGBoost": {
+    "test_r2": -0.331,
+    "test_rmse": 0.94,
+    "test_mae": 0.82,
+    "coverage_80": 100.0,
+    "coverage_95": 100.0,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 1.26,
+        "predicted": 0.67,
+        "lower_80": -0.31,
+        "upper_80": 2.39,
+        "lower_95": -6.16,
+        "upper_95": 2.86
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.29,
+        "predicted": 0.53,
+        "lower_80": -0.48,
+        "upper_80": 2.32,
+        "lower_95": -7.61,
+        "upper_95": 3.1
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 0.37,
+        "predicted": 0.55,
+        "lower_80": -0.61,
+        "upper_80": 2.34,
+        "lower_95": -8.45,
+        "upper_95": 2.92
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 2.21,
+        "predicted": 0.5,
+        "lower_80": -0.55,
+        "upper_80": 2.22,
+        "lower_95": -7.63,
+        "upper_95": 2.87
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": 1.65,
+        "predicted": 0.4,
+        "lower_80": -0.59,
+        "upper_80": 2.18,
+        "lower_95": -7.73,
+        "upper_95": 2.84
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": 1.04,
+        "predicted": 0.16,
+        "lower_80": -0.84,
+        "upper_80": 1.72,
+        "lower_95": -7.97,
+        "upper_95": 2.53
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": 0.67,
+        "predicted": 0.14,
+        "lower_80": -0.85,
+        "upper_80": 1.92,
+        "lower_95": -7.99,
+        "upper_95": 2.58
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.88,
+        "predicted": 0.15,
+        "lower_80": -0.95,
+        "upper_80": 1.87,
+        "lower_95": -8.84,
+        "upper_95": 2.34
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.53,
+        "predicted": 0.14,
+        "lower_80": -1.01,
+        "upper_80": 1.92,
+        "lower_95": -7.99,
+        "upper_95": 2.51
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": 0.73,
+        "predicted": 0.15,
+        "lower_80": -0.84,
+        "upper_80": 1.94,
+        "lower_95": -7.98,
+        "upper_95": 2.59
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": 1.4,
+        "predicted": 0.12,
+        "lower_80": -0.98,
+        "upper_80": 1.91,
+        "lower_95": -8.03,
+        "upper_95": 2.56
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": 1.7,
+        "predicted": 0.08,
+        "lower_80": -0.98,
+        "upper_80": 1.88,
+        "lower_95": -4.38,
+        "upper_95": 2.65
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.73,
+        "predicted": 0.08,
+        "lower_80": -0.92,
+        "upper_80": 1.85,
+        "lower_95": -6.76,
+        "upper_95": 2.44
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.52,
+        "predicted": 0.07,
+        "lower_80": -0.97,
+        "upper_80": 1.86,
+        "lower_95": -6.79,
+        "upper_95": 2.44
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": -0.04,
+        "predicted": 0.08,
+        "lower_80": -0.92,
+        "upper_80": 1.88,
+        "lower_95": -8.06,
+        "upper_95": 2.65
+      }
+    ]
+  },
+  "Gradient Boosting": {
+    "test_r2": -0.195,
+    "test_rmse": 0.891,
+    "test_mae": 0.785,
+    "coverage_80": 100.0,
+    "coverage_95": 100.0,
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 1.26,
+        "predicted": 0.61,
+        "lower_80": -0.28,
+        "upper_80": 2.52,
+        "lower_95": -5.77,
+        "upper_95": 3.0
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.29,
+        "predicted": 0.74,
+        "lower_80": -0.39,
+        "upper_80": 2.66,
+        "lower_95": -6.63,
+        "upper_95": 3.27
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 0.37,
+        "predicted": 0.75,
+        "lower_80": -0.59,
+        "upper_80": 2.83,
+        "lower_95": -7.61,
+        "upper_95": 3.19
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 2.21,
+        "predicted": 0.49,
+        "lower_80": -0.7,
+        "upper_80": 2.39,
+        "lower_95": -6.87,
+        "upper_95": 2.93
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": 1.65,
+        "predicted": 0.72,
+        "lower_80": -0.41,
+        "upper_80": 2.63,
+        "lower_95": -6.65,
+        "upper_95": 3.25
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": 1.04,
+        "predicted": 0.17,
+        "lower_80": -0.96,
+        "upper_80": 1.8,
+        "lower_95": -7.19,
+        "upper_95": 2.61
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": 0.67,
+        "predicted": 0.17,
+        "lower_80": -0.72,
+        "upper_80": 2.25,
+        "lower_95": -7.19,
+        "upper_95": 2.7
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.88,
+        "predicted": 0.17,
+        "lower_80": -1.12,
+        "upper_80": 2.02,
+        "lower_95": -8.19,
+        "upper_95": 2.57
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.53,
+        "predicted": 0.17,
+        "lower_80": -1.12,
+        "upper_80": 2.08,
+        "lower_95": -7.19,
+        "upper_95": 2.61
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": 0.73,
+        "predicted": 0.18,
+        "lower_80": -0.71,
+        "upper_80": 2.26,
+        "lower_95": -7.18,
+        "upper_95": 2.62
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": 1.4,
+        "predicted": 0.17,
+        "lower_80": -1.03,
+        "upper_80": 2.25,
+        "lower_95": -7.22,
+        "upper_95": 2.7
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": 1.7,
+        "predicted": 0.17,
+        "lower_80": -1.0,
+        "upper_80": 2.29,
+        "lower_95": -3.9,
+        "upper_95": 2.7
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.73,
+        "predicted": 0.17,
+        "lower_80": -0.72,
+        "upper_80": 2.25,
+        "lower_95": -6.21,
+        "upper_95": 2.61
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.52,
+        "predicted": 0.17,
+        "lower_80": -0.72,
+        "upper_80": 2.29,
+        "lower_95": -6.23,
+        "upper_95": 2.7
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": -0.04,
+        "predicted": 0.17,
+        "lower_80": -0.96,
+        "upper_80": 2.32,
+        "lower_95": -7.19,
+        "upper_95": 2.7
+      }
+    ]
+  },
+  "Ensemble": {
+    "test_r2": -0.77,
+    "test_rmse": 1.084,
+    "test_mae": 0.934,
+    "coverage_80": 73.3,
+    "coverage_95": 93.3,
+    "weights": {
+      "Ridge": 0.058,
+      "LASSO": 0.244,
+      "Random Forest": 0.341,
+      "XGBoost": 0.188,
+      "Gradient Boosting": 0.169
+    },
+    "data": [
+      {
+        "date": "2022-03-31",
+        "quarter": "2022 Q1",
+        "actual": 1.26,
+        "predicted": 0.43,
+        "lower_80": -0.88,
+        "upper_80": 1.75,
+        "lower_95": -2.27,
+        "upper_95": 3.13
+      },
+      {
+        "date": "2022-06-30",
+        "quarter": "2022 Q2",
+        "actual": 1.29,
+        "predicted": 0.29,
+        "lower_80": -1.61,
+        "upper_80": 2.19,
+        "lower_95": -3.51,
+        "upper_95": 4.08
+      },
+      {
+        "date": "2022-09-30",
+        "quarter": "2022 Q3",
+        "actual": 0.37,
+        "predicted": 0.99,
+        "lower_80": 0.19,
+        "upper_80": 1.8,
+        "lower_95": -1.68,
+        "upper_95": 3.67
+      },
+      {
+        "date": "2022-12-31",
+        "quarter": "2022 Q4",
+        "actual": 2.21,
+        "predicted": 0.52,
+        "lower_80": -0.36,
+        "upper_80": 1.4,
+        "lower_95": -2.2,
+        "upper_95": 3.24
+      },
+      {
+        "date": "2023-03-31",
+        "quarter": "2023 Q1",
+        "actual": 1.65,
+        "predicted": 0.49,
+        "lower_80": -0.61,
+        "upper_80": 1.59,
+        "lower_95": -2.47,
+        "upper_95": 3.45
+      },
+      {
+        "date": "2023-06-30",
+        "quarter": "2023 Q2",
+        "actual": 1.04,
+        "predicted": 0.6,
+        "lower_80": -3.18,
+        "upper_80": 4.37,
+        "lower_95": -5.62,
+        "upper_95": 6.82
+      },
+      {
+        "date": "2023-09-30",
+        "quarter": "2023 Q3",
+        "actual": 0.67,
+        "predicted": 0.46,
+        "lower_80": -3.38,
+        "upper_80": 4.3,
+        "lower_95": -5.85,
+        "upper_95": 6.77
+      },
+      {
+        "date": "2023-12-31",
+        "quarter": "2023 Q4",
+        "actual": -0.88,
+        "predicted": 0.59,
+        "lower_80": -3.34,
+        "upper_80": 4.52,
+        "lower_95": -5.88,
+        "upper_95": 7.06
+      },
+      {
+        "date": "2024-03-31",
+        "quarter": "2024 Q1",
+        "actual": -0.53,
+        "predicted": 0.35,
+        "lower_80": -2.65,
+        "upper_80": 3.36,
+        "lower_95": -4.78,
+        "upper_95": 5.48
+      },
+      {
+        "date": "2024-06-30",
+        "quarter": "2024 Q2",
+        "actual": 0.73,
+        "predicted": -0.07,
+        "lower_80": -1.38,
+        "upper_80": 1.23,
+        "lower_95": -3.13,
+        "upper_95": 2.98
+      },
+      {
+        "date": "2024-09-30",
+        "quarter": "2024 Q3",
+        "actual": 1.4,
+        "predicted": -0.16,
+        "lower_80": -1.23,
+        "upper_80": 0.92,
+        "lower_95": -3.05,
+        "upper_95": 2.74
+      },
+      {
+        "date": "2024-12-31",
+        "quarter": "2024 Q4",
+        "actual": 1.7,
+        "predicted": -0.41,
+        "lower_80": -1.42,
+        "upper_80": 0.61,
+        "lower_95": -2.33,
+        "upper_95": 1.52
+      },
+      {
+        "date": "2025-03-31",
+        "quarter": "2025 Q1",
+        "actual": 0.73,
+        "predicted": 0.06,
+        "lower_80": -1.53,
+        "upper_80": 1.65,
+        "lower_95": -2.92,
+        "upper_95": 3.04
+      },
+      {
+        "date": "2025-06-30",
+        "quarter": "2025 Q2",
+        "actual": 0.52,
+        "predicted": 0.03,
+        "lower_80": -1.43,
+        "upper_80": 1.49,
+        "lower_95": -2.79,
+        "upper_95": 2.85
+      },
+      {
+        "date": "2025-09-30",
+        "quarter": "2025 Q3",
+        "actual": -0.04,
+        "predicted": 0.05,
+        "lower_80": -1.43,
+        "upper_80": 1.53,
+        "lower_95": -3.21,
+        "upper_95": 3.3
+      }
+    ]
+  }
+}
